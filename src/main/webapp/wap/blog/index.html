@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<!--解决uc更改默认字体大小-->
+	<meta name="wap-font-scale" content="no"/>
+	<title>安梦-Blog</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/public.css"/>
+	<link rel="stylesheet" href="../static/css/blog.css" />
+	<script src="../static/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+	<style type="text/css">
+		/*.vueAdd{display: none;}*/
+		.dropload-up,.dropload-down{
+			position: relative;
+			height: 0;
+			overflow: hidden;
+			font-size: 12px;
+			/* 开启硬件加速 */
+			-webkit-transform:translateZ(0);
+			transform:translateZ(0);
+		}
+		.dropload-down{
+			height: 50px;
+		}
+		.dropload-refresh,.dropload-update,.dropload-load,.dropload-noData{
+			height: 50px;
+			line-height: 50px;
+			text-align: center;
+		}
+		.dropload-load .loading{
+			display: inline-block;
+			height: 15px;
+			width: 15px;
+			border-radius: 100%;
+			margin: 6px;
+			border: 2px solid #666;
+			border-bottom-color: transparent;
+			vertical-align: middle;
+			-webkit-animation: rotate 0.75s linear infinite;
+			animation: rotate 0.75s linear infinite;
+		}
+		@-webkit-keyframes rotate {
+			0% {
+				-webkit-transform: rotate(0deg);
+			}
+			50% {
+				-webkit-transform: rotate(180deg);
+			}
+			100% {
+				-webkit-transform: rotate(360deg);
+			}
+		}
+		@keyframes rotate {
+			0% {
+				transform: rotate(0deg);
+			}
+			50% {
+				transform: rotate(180deg);
+			}
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+
+	</style>
+</head>
+<body>
+	<div class="viewport">
+		<!-- 效果类 -->
+		<div class="mengceng"></div>
+		<div class="blog_mengceng"></div>
+		<div class="group_mc"></div>
+		<div style="height:0.9rem;">&nbsp;</div>
+
+
+		<!-- 我的关注 微博更多 -->
+		<ul class="blog_part_more1 clearfix">
+			<li>收藏</li><li>帮上头条</li><li>取消关注</li><li>屏蔽</li><li>举报</li>
+		</ul>
+		<!-- 效果类 end -->
+
+		<!-- start head-->
+		<div class="header blog_head clearfix">
+			<i class="write_blog"></i>
+			<div class="blog_nav">
+				<span class="my_blog on"><p class="ellipsis">最热</p><i class="up_down"></i></span>
+				<span class="hot_blog "><p>最新</p><i class="up_down"></i></span>
+			</div>
+			<i class="second_code"></i>
+		</div>
+
+		<!--我的blog-->
+		<div class="blog_content" id="myBlogContent">
+			<div class="my_blog_content" name="最热" hadvue="0">
+				<div class="my_blog_content_list">
+					<!-- 只有全部关注有 ge -->
+					<div class="blog_person">
+						<ul class="clearfix">
+							<li><div><img src="../static/images/head_img_03.png" alt=""></div><p class="ellipsis">我的故事</p></li>
+							<li><div><img src="../static/images/head_img_03.png" alt=""></div><p class="ellipsis">我的故事123</p></li>
+							<li><div><img src="../static/images/head_img_03.png" alt=""></div><p class="ellipsis">我的故事</p></li>
+						</ul>
+					</div>
+					<!-- 内容  关注和最多 只能有一个-->
+					<div class="blog_part" v-for="(value, key) in blogs">
+						<div class="blog_part_head clearfix">
+							<div class="person_head_img"><img :src="value.headUrl" alt=""><i class="blog_icon_v"></i></div>
+							<div class="person_head_msg">
+								<h4 class="person_name">{{value.title}}<i class="blog_icon_hg6"></i></h4>
+								<p><span class="blog_time">{{value.createAt}}</span>来自 <span class="blog_src">微博 weibo.com</span></p>
+							</div>
+							<div class="blog_this_more"></div>
+						</div>
+						<div class="blog_part_body">
+							<a href="blog_comment.html">
+								{{value.txt}}
+							</a>
+						</div>
+						<ul class="blog_part_down clearfix">
+							<li class="blog_discuss"><i></i><p>评论</p></li>
+							<li class="blog_repeat"><i></i><p>转发</p></li>
+							<li class="blog_zan"><i></i><p class="blog_zan_num">{{value.likeQuantity}}</p></li>
+						</ul>
+
+					</div>
+					<div class="blog_part">
+						<div class="blog_part_head clearfix">
+							<div class="person_head_img"><img src="../static/images/head_img_03.png" alt=""><i class="blog_icon_v"></i></div>
+							<div class="person_head_msg">
+								<h4 class="person_name">读书语录<i class="blog_icon_hg6"></i></h4>
+								<p><span class="blog_time">1分钟前</span>来自 <span class="blog_src">微博 weibo.com</span></p>
+							</div>
+							<div class="blog_this_more"></div>
+						</div>
+						<div class="blog_part_body">
+							<a href="blog_comment.html">
+								<p>感谢少时<em>@小明</em><em>@小红</em>少时诵诗书所所所所所所所所所所所所所所所所所所所所所所</p>
+								<div class="blog_img">
+									<img src="../static/images/blog_img_03.jpg" alt="">
+								</div>
+							</a>
+
+
+						</div>
+						<ul class="blog_part_down clearfix">
+							<li class="blog_discuss"><i></i><p>评论</p></li>
+							<li class="blog_repeat"><i></i><p>转发</p></li>
+							<li class="blog_zan"><i></i><p class="blog_zan_num">6</p></li>
+						</ul>
+
+					</div>
+				</div>
+
+			</div>
+
+		</div>
+		<!--推荐blog-->
+		<div class="blog_content" id="recommendBlogContent" style="display: none;">
+			<!--<div class="recommend_blog_content" name="热门">-->
+				<!--<div class="recommend_blog_content_list">-->
+					<!--<div class="blog_part" v-for="(value, key) in hotBlogs">-->
+						<!--<div class="blog_part_head clearfix">-->
+							<!--<div class="person_head_img"><img :src="value.headUrl" alt=""><i class="blog_icon_v"></i></div>-->
+							<!--<div class="person_head_msg">-->
+								<!--<h4 class="person_name">{{value.title}}<i class="blog_icon_hg6"></i></h4>-->
+								<!--<p><span class="blog_time">{{value.createAt}}</span>来自 <span class="blog_src">微博 weibo.com</span></p>-->
+							<!--</div>-->
+							<!--<div class="blog_this_more"></div>-->
+						<!--</div>-->
+						<!--<div class="blog_part_body">-->
+							<!--<a href="blog_comment.html">-->
+								<!--{{value.txt}}-->
+							<!--</a>-->
+						<!--</div>-->
+						<!--<ul class="blog_part_down clearfix">-->
+							<!--<li class="blog_discuss"><i></i><p>评论</p></li>-->
+							<!--<li class="blog_repeat"><i></i><p>转发</p></li>-->
+							<!--<li class="blog_zan"><i></i><p class="blog_zan_num">{{value.likeQuantity}}</p></li>-->
+						<!--</ul>-->
+
+					<!--</div>-->
+				<!--</div>-->
+			<!--</div>-->
+		</div>
+		<!--尾部-->
+		<div style="height:1.03rem;">&nbsp;</div>
+		<div class="footer">
+			<ul class="clearfix">
+						<li class="on">
+					<a href="/wap/index.html">
+						<i class="footer_home"></i>
+						<p>首页</p>
+					</a>
+				</li>
+			<!-- 	<li>
+					<a href="javascript:;">
+						<i class="footer_home"></i>
+						<p>贴吧</p>
+					</a>
+				</li>
+				<li>
+					<a href="/wap/game/game.html">
+						<i class="footer_home"></i>
+						<p>游戏</p>
+					</a>
+				</li> -->
+				<li>
+					<a href="/wap/live/watch.html">
+						<i class="footer_home"></i>
+						<p>直播</p>
+					</a>
+				</li>
+				<li>
+					<a href="/wap/blog/index.html">
+						<i class="footer_home"></i>
+						<p>动态</p>
+					</a>
+				</li>
+			<!-- 	<li>
+					<a href="javascript:;">
+						<i class="footer_home"></i>
+						<p>好友</p>
+					</a>
+				</li> -->
+				<li>
+					<a href="/wap/my/index.html">
+						<i class="footer_home"></i>
+						<p>我的</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+<script src="../static/js/index.js"></script>
+<script src="../static/js/isLogin.js"></script>
+<!-- <script src="../static/js/blog.js"></script> -->
+<script src="../static/js/vue.min.js"></script>
+<script src="../static/js/dropload.min.js" type="text/javascript" charset="utf-8"></script>
+<script>
+
+	//首次加载 全部关注和热门
+    recommendBlogShow("最新");
+    myBlogShow("最热");
+
+
+	$(function(){
+        /*
+		1.获取微博,默认获取全部关注
+		*/
+        var  storage = JSON.parse(window.localStorage.getItem('user'));
+
+		$('.blog_part').eq(0).css({'margin-top':'0px'});
+		//全部关注 每条微博更多
+		$(document).on('click','.blog_this_more',function(){
+			$('.blog_part_more1').show();
+			$('.blog_mengceng').show();
+			// 当前微博，
+			var index_ = $('.blog_this_more').index($(this));
+			var thisBlog = $(this).parents('.blog_part');
+			thisBlogMore(thisBlog);
+		})
+        /*
+		每条微博，更多
+		 */
+        function thisBlogMore(cont){
+            //只有在 每条博客更多 点击后才能触发。
+        }
+           var kz = '<div class="blog_repeat_more">'+
+                   '<div class="clearfix blog_kz"><p>'+"快转"+'</p></div>'+
+                   '<div class="clearfix blog_zf"><p>'+"转发"+'</p></div>'+
+                   '<div class="clearfix blog_sendfriend"><p>'+"发送给朋友"+'</p></div></div>';
+           $(document).on('click','.blog_repeat',function(){
+               if($(this).find('.blog_repeat_more').length >0) {
+                   $(this).find('.blog_repeat_more').show();
+               }else{
+                   $(this).append(kz);
+               }
+               $('.blog_mengceng').show();
+           })
+       })
+
+       /*
+       nav
+       */
+	  $('.blog_nav span').click(function(){
+		var index_ = $('.blog_nav span').index($(this));
+		$(this).addClass('on').siblings().removeClass('on');
+		$('.blog_content').hide().eq(index_).show();
+	})
+		/*
+		取消蒙层
+		 */
+		$('.blog_mengceng').click(function(){
+			$('body').find('.myBlog_del').remove();
+			$('.myBlog_add').hide();
+			//more 
+			$('.blog_part_more1').hide();			
+			$('.blog_repeat_more').hide();
+			// $('.blog_mengceng').hide().prev().show();
+			$(this).hide();
+		})
+
+
+	  /*
+	  点赞 ajax type=1 blog 点赞1，评论点赞2
+	  */
+	 $(document).on('click','.blog_zan',function(){
+		 	var self = $(this);
+			$(this).css({"pointer-events":"none"}); //1s 内不能点击
+			if($(this).attr('hadZan') !=1){
+				$(this).attr('hadZan',1).children('p').html(Number($(this).children('p').html())+1).siblings('i').css({'background-image':'url(../static/images/icon/icon_red_zan.png)'});
+			}else{
+				$(this).attr('hadZan',0).children('p').html(Number($(this).children('p').html())-1).siblings('i').css({'background-image':'url(../static/images/icon/icon_zan.png)'});
+			}
+			$(this).children('i').addClass('big_zan');
+			setTimeout(function(){
+				self.css({'pointer-events':'auto'}).children('i').removeClass('big_zan');
+			},1000)
+			var usedata={bizId:$(this).parents('.blog_part').attr('thisblogid'),createMan:$(this).parents('.blog_part').attr('creatmanid'),type:2};
+		 	$.ajax({
+				type:'post',
+				url:'/wap/like/add',
+				data:JSON.stringify(usedata),
+				contentType:"application/json",
+				success:function (data) {
+					if(data.success){
+						console.log(data.collection);
+					}else{
+					    showBackMsg(data.message);
+					}
+                }
+			})
+		})
+
+    //最热
+	function  myBlogShow(care){
+        var my_blog_content1 ='<div class="my_blog_content" name='+care+'>'+
+            '<div class="my_blog_content_list">'+
+            '<div class="blog_person">'+
+            '<ul class="clearfix">'+
+            '<li><div><img src="../static/images/head_img_03.png" alt=""></div><p class="ellipsis">我的故事</p></li>'+
+            '<li><div><img src="../static/images/head_img_03.png" alt=""></div><p class="ellipsis">我的故事123</p></li>'+
+            '<li><div><img src="../static/images/head_img_03.png" alt=""></div><p class="ellipsis">我的故事</p></li>'+
+            '</ul></div>'+
+            '<div class="blog_part" v-for="(value, key) in blogs" :thisblogid="value.id" :creatmanid="value.userId">'+
+            '<div class="blog_part_head clearfix">'+
+            '<div class="person_head_img"><img :src="value.headUrl" alt=""><i class="blog_icon_v"></i></div>'+
+            '<div class="person_head_msg">'+
+            '<h4 class="person_name">'+'{{value.createMan}}'+'<i class="blog_icon_hg6"></i></h4>'+
+            '<p><span class="blog_time">'+'{{value.createAt}}'+'</span></p>'+
+            '</div>'+
+            '<div class="blog_this_more"></div>'+
+            '</div>'+
+            '<div class="blog_part_body">'+
+            '<a :href="\'blog_comment.html?id=\' + value.id">'+'{{value.txt}}'+'</a>'+
+			'<template v-if="value.isForward == 1">'+
+				'<template v-if="value.contentType  == 1">'+
+					'<div :forBlogId="value.forwardBlog.id" class="reBlog">'+
+						'<p class="blog_media_msg">'+
+							'<a href="#">@{{value.forwardBlog.createMan}}</a>{{value.forwardBlog.title}}' +
+			            '</p>'+
+						'<div class="media-pic"><img :src="value.forwardBlog.headUrl" alt=""></div>'+
+			       '</div>'+
+				'</template>'+
+				'<template v-else-if="value.contentType  == 2">'+
+					'<div :forBlogId="value.forwardBlog.id" class="reBlog">'+
+						'<p class="blog_media_msg">'+
+							'<a href="#">@{{value.forwardBlog.createMan}}</a>{{value.forwardBlog.title}}' +
+						'</p>'+
+						'<div><video :src="value.forwardBlog.fileList.url"></video></div>'+
+					'</div>' +
+			   '</template>'+
+            '</template>'+
+            '</div>'+
+            '<ul class="blog_part_down clearfix">'+
+            '<li class="blog_repeat"><i></i><p>转发</p></li>'+
+            '<li class="blog_discuss"><i></i><p>评论</p></li>'+
+            '<li class="blog_zan"><i></i><p class="blog_zan_num">'+'{{value.likeQuantity}}'+'</p></li>'+
+            '</ul>'+
+            '</div></div></div>';
+
+             $('#myBlogContent').html('').append(my_blog_content1);
+
+
+		var vue = new Vue({
+			el:'.my_blog_content_list',
+			data:{
+			    blogs:[],
+			},
+			methods:{
+			    moreBlogs:function(upordown){
+			        var _self = this;
+                    $.ajax({
+                        url:'/wap/article/find-all',
+                        type:'get',
+                        data:{
+                            pageSize:10,
+                            type:1,
+                        },
+                        async:false,
+                        success:function (data) {
+                            if(data.success){
+                                getData = data.collection;
+                                console.log(getData);
+                                    for(var i=0;i<getData.length;i++){
+                                        if(upordown){//1表示下拉，数据添加在上面
+                                            _self.blogs.push(getData[i]);
+										}else{//0 手指上滑，数据添加在下面
+                                            _self.blogs.unshift(getData[i]);
+										}
+                                    }
+
+                            }else{
+                                showBackMsg2(data.message);
+                            }
+                        }
+                    })
+				},
+				isscroll:function() {
+			        $('.my_blog_content').each(function(){
+
+					})
+                    $('.my_blog_content').dropload({
+                        //scrollArea很关键，要不然加载更多不起作用
+                        scrollArea: window,
+                        domUp: {
+                            domClass: 'dropload-up',
+                            domRefresh: '<div class="dropload-refresh">↓下拉刷新</div>',
+                            domUpdate: '<div class="dropload-update">↑释放更新</div>',
+                            domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+                        },
+                        domDown: {
+                            domClass: 'dropload-down',
+                            domRefresh: '<div class="dropload-refresh">↑上拉加载更多</div>',
+                            domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+                            domNoData: '<div class="dropload-noData">暂无数据</div>'
+                        },
+                        loadUpFn: function (me) {
+                            //下拉刷新需要调用的函数
+                            vue.moreBlogs(0);
+                            //重置下拉刷新
+                            me.resetload();
+                        },
+                        loadDownFn: function (me) {
+                            //上拉加载更多需要调用的函数
+                            vue.moreBlogs(1);
+                            //定时器函数,为了看出上拉加载更多效果
+                            setTimeout(function () {
+                                // 每次数据加载完，必须重置
+                                me.resetload();
+                            }, 1000);
+                        }
+                    });
+                },
+			}
+		})
+        setTimeout(function(){vue.isscroll();},200)
+	}
+	//推荐
+	function recommendBlogShow(care){
+        var recommond_blog_content ='<div class="recommend_blog_content" name='+care+'>'+
+			'<div class="recommend_blog_content_list">'+
+            '<div class="blog_part" v-for="(value, key) in hotBlogs" :thisblogid="value.id" :creatmanid="value.userId">'+
+            '<div class="blog_part_head clearfix">'+
+            '<div class="person_head_img"><img :src="value.headUrl" alt=""><i class="blog_icon_v"></i></div>'+
+            '<div class="person_head_msg">'+
+            '<h4 class="person_name">'+'{{value.createMan}}'+'<i class="blog_icon_hg6"></i></h4>'+
+            '<p><span class="blog_time">'+'{{value.createAt}}'+'</span></p>'+
+            '</div>'+
+            '<div class="blog_this_more"></div>'+
+            '</div>'+
+            '<div class="blog_part_body">'+
+            '<a :href="\'blog_comment.html?id=\' + value.id">'+'{{value.txt}}'+'</a>'+
+            '<template v-if="value.isForward == 1">'+
+            '<template v-if="value.contentType  == 1">'+
+            '<div :forBlogId="value.forwardBlog.id" class="reBlog">'+
+            '<p class="blog_media_msg">'+
+            '<a href="#">@{{value.forwardBlog.createMan}}</a>{{value.forwardBlog.title}}' +
+            '</p>'+
+            '<div class="media-pic"><img :src="value.forwardBlog.headUrl" alt=""></div>'+
+            '</div>'+
+            '</template>'+
+            '<template v-else-if="value.contentType  == 2">'+
+            '<div :forBlogId="value.forwardBlog.id" class="reBlog">'+
+            '<p class="blog_media_msg">'+
+            '<a href="#">@{{value.forwardBlog.createMan}}</a>{{value.forwardBlog.title}}' +
+            '</p>'+
+            '<div><video :src="value.forwardBlog.fileList.url"></video></div>'+
+            '</div>' +
+            '</template>'+
+            '</template>'+
+            '</div>'+
+            '<ul class="blog_part_down clearfix">'+
+            '<li class="blog_repeat"><i></i><p>评论</p></li>'+
+            '<li class="blog_discuss"><i></i><p>转发</p></li>'+
+            '<li class="blog_zan"><i></i><p class="blog_zan_num">'+'{{value.likeQuantity}}'+'</p></li>'+
+            '</ul>'+
+            '</div></div></div>';
+		$('#recommendBlogContent').html('').append(recommond_blog_content);
+	     var hotVue = new Vue({
+			 el:'.recommend_blog_content_list',
+			 data:{
+                 hotBlogs:[],
+			 },
+             methods:{
+                 moreBlogs:function(upordown){
+                     var _self = this;
+                     $.ajax({
+                         url:'/wap/article/find-all',
+                         type:'get',
+                         data:{
+                             pageSize:10,
+                             type:1,
+                         },
+                         async:false,
+                         success:function (data) {
+                             if(data.success){
+                                 getData = data.collection;
+                                 for(var i=0;i<getData.length;i++){
+                                     if(upordown){//1表示下拉，数据添加在上面
+                                         _self.hotBlogs.push(getData[i]);
+                                     }else{//0 手指上滑，数据添加在下面
+                                         _self.hotBlogs.unshift(getData[i]);
+                                     }
+                                 }
+
+                             }else{
+                                 showBackMsg2(data.message);
+                             }
+                         }
+                     })
+                 },
+                 isscroll:function() {
+                     $('.recommend_blog_content').each(function(){
+
+                     })
+                     $('.recommend_blog_content').dropload({
+                         //scrollArea很关键，要不然加载更多不起作用
+                         scrollArea: window,
+                         domUp: {
+                             domClass: 'dropload-up',
+                             domRefresh: '<div class="dropload-refresh">↓下拉刷新</div>',
+                             domUpdate: '<div class="dropload-update">↑释放更新</div>',
+                             domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+                         },
+                         domDown: {
+                             domClass: 'dropload-down',
+                             domRefresh: '<div class="dropload-refresh">↑上拉加载更多</div>',
+                             domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+                             domNoData: '<div class="dropload-noData">暂无数据</div>'
+                         },
+                         loadUpFn: function (me) {
+                             //下拉刷新需要调用的函数
+                             hotVue.moreBlogs(0);
+                             //重置下拉刷新
+                             me.resetload();
+                         },
+                         loadDownFn: function (me) {
+                             //上拉加载更多需要调用的函数
+                             hotVue.moreBlogs(1);
+                             //定时器函数,为了看出上拉加载更多效果
+                             setTimeout(function () {
+                                 // 每次数据加载完，必须重置
+                                 me.resetload();
+                             }, 1000);
+                         }
+                     });
+                 },
+             }
+		 })
+        setTimeout(function(){hotVue.isscroll();},200)
+	}
+
+	$(document).on('click',".reBlog",function(){
+		window.location.href="blog_comment.html?id="+$(this).attr('forblogid');
+	})
+    $(document).on('click',".reBlog a",function(event){
+        event.stopPropagation();
+    })
+</script>
+</html>

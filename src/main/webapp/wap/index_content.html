@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<!--解决uc更改默认字体大小-->
+	<meta name="wap-font-scale" content="no"/>
+	<title>新闻内容</title>
+	<link rel="stylesheet" type="text/css" href="../wap/static/css/public.css"/>
+	<link rel="stylesheet" href="../wap/static/css/index.css" />
+	<script src="../wap/static/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../wap/static/js/common.js"></script>
+	<style>
+		#ifm{width: 100%;border: 0;position: fixed;left: 0;top:0;z-index: 10}
+		.header{position: fixed;left: 0;top: 0;z-index: 99;background: #ccc;}
+		.backTime{text-align: center;color:#333;margin-top: 100px;font-size: 16px;}
+		.backTime span{color:blue;font-size:20px;}
+	</style>
+</head>
+<body>
+	<iframe id="ifm"></iframe>
+	<!--尾部-->
+		<div class="footer">
+				<ul class="clearfix">
+					<li class="on">
+					<a href="/wap/index.html">
+						<i class="footer_home"></i>
+						<p>首页</p>
+					</a>
+				</li>
+			<!-- 	<li>
+					<a href="javascript:;">
+						<i class="footer_home"></i>
+						<p>贴吧</p>
+					</a>
+				</li>
+				<li>
+					<a href="/wap/game/game.html">
+						<i class="footer_home"></i>
+						<p>游戏</p>
+					</a>
+				</li> -->
+				<li>
+					<a href="/wap/live/watch.html">
+						<i class="footer_home"></i>
+						<p>直播</p>
+					</a>
+				</li>
+				<li>
+					<a href="/wap/blog/index.html">
+						<i class="footer_home"></i>
+						<p>动态</p>
+					</a>
+				</li>
+			<!-- 	<li>
+					<a href="javascript:;">
+						<i class="footer_home"></i>
+						<p>好友</p>
+					</a>
+				</li> -->
+				<li>
+					<a href="/wap/my/index.html">
+						<i class="footer_home"></i>
+						<p>我的</p>
+					</a>
+				</ul>
+		</div>
+
+
+	<script>
+
+		function GetQueryString(name){
+		     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+		     // var r = window.location.search.substr(1).match(reg);
+		     var getUrl = window.location.search;
+
+		     console.log(getUrl,1);
+		     getUrl = decodeURI(getUrl);
+		     console.log(getUrl,2);
+		     var r = getUrl.substr(1).match(reg);
+		     if(r!=null)return  unescape(r[2]); return null;
+		}
+		var getUrl= GetQueryString('userUrl');
+		if(getUrl!=null && getUrl.toString().length>1){ //请求参数不为空
+			$('#ifm').attr('src',getUrl).height($(window).height());
+		}else{
+			var backTime=3;
+			var msg = '<div class="backTime">'+"404 没有页面，正在返回"+
+						'<span>'+backTime+'</span>'+"..."+'</div>';
+			$('body').append(msg);
+			setInterval(function(){
+				backTime--;
+				$('.backTime span').html(backTime);
+				if(backTime<1){
+					history.go(-1);
+				}
+			},1000)
+		}
+
+		
+		</script>
+	</script>
+</body>
+</html>

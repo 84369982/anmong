@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<!--解决uc更改默认字体大小-->
+	<meta name="wap-font-scale" content="no"/>
+	<title>web</title>
+	<link rel="stylesheet" type="text/css" href="../wap/static/css/public.css"/>
+	<link rel="stylesheet" href="../wap/static/css/index.css" />
+	<script src="../wap/static/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../wap/static/js/common.js"></script>
+
+	<script src="../wap/static/js/iscroll.js" type="text/javascript" charset="utf-8"></script>
+<style type="text/css">
+	html{display: none;}
+	body iframe{
+
+		border: 0;position: fixed;left: 0;top:0;width: 100%;
+	}
+
+	/*.vueAdd{display: none;}*/
+	.dropload-up,.dropload-down{
+	    position: relative;
+	    height: 0;
+	    overflow: hidden;
+	    font-size: 12px;
+	    /* 开启硬件加速 */
+	    -webkit-transform:translateZ(0);
+	    transform:translateZ(0);
+	}
+	.dropload-down{
+	    height: 50px;
+	}
+	.dropload-refresh,.dropload-update,.dropload-load,.dropload-noData{
+	    height: 50px;
+	    line-height: 50px;
+	    text-align: center;
+	}
+	.dropload-load .loading{
+	    display: inline-block;
+	    height: 15px;
+	    width: 15px;
+	    border-radius: 100%;
+	    margin: 6px;
+	    border: 2px solid #666;
+	    border-bottom-color: transparent;
+	    vertical-align: middle;
+	    -webkit-animation: rotate 0.75s linear infinite;
+	    animation: rotate 0.75s linear infinite;
+	}
+	@-webkit-keyframes rotate {
+	    0% {
+	        -webkit-transform: rotate(0deg);
+	    }
+	    50% {
+	        -webkit-transform: rotate(180deg);
+	    }
+	    100% {
+	        -webkit-transform: rotate(360deg);
+	    }
+	}
+	@keyframes rotate {
+	    0% {
+	        transform: rotate(0deg);
+	    }
+	    50% {
+	        transform: rotate(180deg);
+	    }
+	    100% {
+	        transform: rotate(360deg);
+	    }
+	}
+			
+</style>
+
+
+<script type="text/javascript">
+	if(top == self){
+		document.documentElement.style.display='block';
+	}else{
+		top.location = selef.location;
+	}
+</script>
+</head>
+<body>
+	<div class="waitMsg">loading...</div>
+	<div class="viewport" id="viewport" style="padding-top:0.85rem;">
+		<div class="header_top">
+			<div class="header_nav clearfix">
+				<ul class="channel clearfix">
+					<li class="on">推荐</li>
+					<li>头条</li>
+					<li>财经</li>
+					<li>体育</li>
+					<li>娱乐</li>
+					<li>军事</li>
+					<li>教育</li>
+					<li>NBA</li>
+					<li>股票</li>
+					<li>星座</li>
+					<li>女性</li>
+					<li>健康</li>
+					<li>育儿</li>
+				</ul>
+				
+			</div>
+			<div class="header_add">添加</div>
+		</div>
+		
+		<!--新闻 下拉刷新-->
+		<div  class="wrapper-el" style="display:none;">
+	        <div class="news scroller">
+				<ul class="clearfix" id="" >
+					
+					
+					<!--类型为1 的新闻 左图，右标题-->
+					<li class="news1 clearfix">
+						<a href="../wap/news/index_article1.html">
+							<div class="img fl"><img src="../wap/static/images/news1_1.png" alt="图片出处" /></div>
+							<div class="news1_title fl">
+								<h4 class="title">目前大部分有关iScroll的例子和教程都是基于iScroll4的目前大部分有关iScroll的例子和教程都是基于iScroll4的</h4>
+								<p><span>来源</span><i class="this_news_close"></i></p>							
+							</div>
+						</a>
+					</li>
+					
+					<!--类型2的新闻，图集上标题，下图-->
+					<li class="news2">
+						<a href="../wap/news/index_article2.html">
+							<h4 class="title">目前大部分有关iScroll的例子和教程都是基于iScroll4的目前大部分有关iScroll的例子和教程都是基于iScroll4的</h4>
+							<ul class="clearfix news_imgs">
+								<li><img src="../wap/static/images/news2_03.png" alt="" /></li>
+								<li><img src="../wap/static/images/news2_03.png" alt="" /></li>
+								<li><img src="../wap/static/images/news2_03.png" alt="" /></li>
+							</ul>
+							<p class="clearfix"><span>新闻要事</span><font>图集</font><i class="this_news_close"></i></p>
+						</a>
+					</li>
+					
+					<!--类型3 的新闻，视频-->
+					<li class="news3">
+						<a href="javascript:;">
+							<h4 class="title">美国白天出现月食</h4>
+							<div class="news3_content">
+								<a href="javascript:"><img src="../wap/static/images/video1_03.jpg" alt="" /></a>
+								<i class="this_news_time">03:20</i>
+							</div>
+							<p class="clearfix"><span>发布者</span><i class="this_news_close"></i></p>
+						</a>
+					</li>
+					
+					<!--类型4 广告-->
+					<li class="news4">
+						<a href="javascript:;">
+							<h4 class="title">传奇霸业</h4>
+							<div class="news4_content">
+								<img src="../wap/static/images/ad1_03.jpg" alt="" />
+							</div>
+							<p class="clearfix"><span>发布者</span><font>广告</font><i class="this_news_close"></i></p>
+						</a>
+					</li>
+					
+				</ul>
+				<div id="thelist">
+					<ul class="clearfix">
+						<!--类型为1 vue.js-->
+						<li class="news1 clearfix  vueAdd" v-for="(value, key) in news">
+							<template v-if="value.pic">
+									<a href="javascript:;" @click='newsUrl(key)'>
+										<div class="img fl"><img :src='value.pic' alt="" /></div>
+										<div class="news1_title fl">
+											<h4 class="title">{{value.title}}</h4>
+											<p><span>{{value.src}}</span></p>						
+										</div>
+									</a>
+							</template>
+							<template v-else>
+								<a href="javascript:;" @click='newsUrl(key)'>
+									<div class="nopic_title fl ">
+										<h4 class="title">{{value.title}}</h4>
+										<p><span>{{value.src}}</span></i></p>							
+									</div>
+								</a>
+							</template>
+							
+						</li>
+					</ul>
+					<!-- <div style="text-align:center;height:50px;line-height:50px;" v-on:click="clickMore">点击加载更多</div> -->
+				</div>
+			</div>
+	 		
+		</div>
+	
+		
+		
+
+	</div>
+	<div class="down">
+				<a href="http://www.miibeian.gov.cn">版权所有 © anmong 蜀ICP备17032039号</a>
+	</div> 
+	<!--尾部-->
+		<div class="footer">
+			<ul class="clearfix">
+				<li class="on">
+					<a href="/wap/index.html">
+						<i class="footer_home"></i>
+						<p>首页</p>
+					</a>
+				</li>
+			<!-- 	<li>
+					<a href="javascript:;">
+						<i class="footer_home"></i>
+						<p>贴吧</p>
+					</a>
+				</li>
+				<li>
+					<a href="/wap/game/game.html">
+						<i class="footer_home"></i>
+						<p>游戏</p>
+					</a>
+				</li> -->
+				<li>
+					<a href="/wap/live/watch.html">
+						<i class="footer_home"></i>
+						<p>直播</p>
+					</a>
+				</li>
+				<li>
+					<a href="/wap/blog/index.html">
+						<i class="footer_home"></i>
+						<p>动态</p>
+					</a>
+				</li>
+			 	<li>
+					<a href="javascript:;">
+						<i class="footer_home"></i>
+						<p>好友</p>
+					</a>
+				</li>
+				<li>
+					<a href="/wap/my/index.html">
+						<i class="footer_home"></i>
+						<p>我的</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+</body>
+</html>
+<script src="../wap/static/js/vue.min.js"></script>
+<script src="../wap/static/js/dropload.min.js" type="text/javascript" charset="utf-8"></script>
+<script>
+			//设置导航条的宽度。
+			$(window).resize(function(){
+				setNavWidth();
+			})
+
+			$(window).ready(function(){
+				setNavWidth();
+			})
+			function setNavWidth(){
+				var w=$(window).width();
+				var px=0;
+				if(w < 720) {
+					 px=w/7.2;       
+				} else {
+					w=720;
+				    px=w/7.2;      
+				}
+				$('.channel').width($('.channel li').length*96/100*px);
+			}
+			
+			var content = '<div class="wrapper">'+
+							'<div class="news scroller">'+
+							'<div id="thelist">'+
+								'<ul class="clearfix">'+
+									'<li class="news1 clearfix  vueAdd" v-for="(value, key) in news">'+
+										'<template v-if="value.pic">'+
+											'<a href="javascript:;" v-on:click="newsUrl(key)">'+
+												'<div class="img fl"><img v-bind:src="value.pic" alt="" /></div>'+
+													'<div class="news1_title fl">'+
+														'<h4 class="title">'+'{{value.title}}'+'</h4>'+
+														'<p><span>'+'{{value.src}}'+'</span></p>'+
+													'</div></a></template>'+
+										'<template v-else>'+
+											'<a href="javascript:;" v-on:click="newsUrl(key)">'+
+											     '<div class="nopic_title fl ">'+
+											    	 '<h4 class="title">'+'{{value.title}}'+'</h4>'+
+											    	 '<p><span>'+'{{value.src}}'+'</span></p>'+
+											    '</div></a></template></li></ul>'+
+								'</div></div>'+
+								'</div>';
+
+			//全局参数
+			var channel=[];//频道
+			var channelNum = 0;//记录当前频道index:默认推荐
+			var start_=parseInt(Math.random()*5+95); //推荐：随机新闻	
+			var num_ =10; //每次请求多少条
+			var rememberUrl =new Array(); //数组，记录每个频道下，每条新闻的连接地址
+			var start_2 = new Array(); //其他频道，每次请求新闻开始的地方.
+			var scrollNum = new Array();//滚动条记录
+			var dropload = new Array(); //上下拉事件。
+			var vm = new Array();
+			/*
+			*1.给没个频道绑定初始值：ID ，url, start_2,scrollNum,
+			 */
+			$('.channel li').each(function(){ //设置参数
+				channel.push($(this).html());
+				var index_= $('.channel li').index($(this));
+				var setId = 'wrapper'+index_; //id
+				rememberUrl[index_] = new Array();//存放链接地址 一个频道使用一个 数组存放。
+			    start_2[index_] = 10; //除了 推荐。其他频道都是默认从10 条开始取数据。 记录每个频道已经获取到了新闻请求开始目录。
+			    scrollNum[index_] = 0; //默认每个频道进去后滚动条在最上面。
+			    dropload[index_] = '';
+				$('#viewport').append(content);//动态绑定内容
+				$('.wrapper').eq(index_).attr('id',setId); //添加不同id 用于vue数据绑定.
+			})
+			//2,
+			$(window).scroll(function(){ //滚动条事件，记录每个频道的滚动条。默认为0，切换频道后，根据之前高度来继续阅读
+				$('.channel li').each(function(){
+					var index_= $('.channel li').index($(this));
+					if($(this).attr('class') == 'on'){
+						scrollNum[index_] = $(document).scrollTop();
+					}
+				})							
+			})
+			/*
+			*3,推荐内容初始化：使用静态内容 warpper-el   
+			 */
+			$('.wrapper').each(function(){ //vue ,第一个 设置默认
+				var index_= $('.wrapper').index($(this));
+				if(index_ ==0){
+					$('.wrapper').eq(0).show();
+					if($('.wrapper').eq(0).attr('hadVue')!=1){
+						// $('.wrapper-el').show();
+						useVue(index_);
+						$('.wrapper').eq(0).attr('hadVue',1);
+					}
+					
+				}
+			})
+			/*
+			*4 切换频道：第一个次绑定vue 之后不绑定。滚动条恢复到之前浏览地方。
+			 */
+			$('.channel li').click(function(){
+				// $('.wrapper-el').hide();
+				var index_= $('.channel li').index($(this));
+				$(this).addClass('on').siblings().removeClass('on'); //频道加粗
+				$('.wrapper').eq(index_).show().siblings('.wrapper').hide();  //频道对应内容显示，其他不显示。
+				$('.warpper').eq(index_).siblings().find('.dropload-down').remove(); //移除 其他频道的上下拉事件。
+				/** ---数据绑定----**/
+				if($('.wrapper').eq(index_).attr('hadVue') !=1){
+					useVue(index_);
+					$('.wrapper').eq(index_).attr('hadVue',1); //设置标记用来判断，只有第一次点击才添加 vue数据绑定;
+				}
+				$('body').scrollTop(scrollNum[index_]); //获取频道的滚动条。切换频道，对应之前浏览的地方。
+
+			})
+			/*
+			* vue 数据绑定：每个频道都绑定一个。
+			 */
+			function useVue(k){	
+				var getId = '#wrapper'+k;
+				
+				//vue 数据
+				 vm[k] = new Vue({
+					el: getId,
+		            data: {
+		            	news:[]
+			            },
+			        methods:{
+				        clickMore:function(upordown){
+		        		var _self =this;
+				        	if(k == 0 ){ //推荐
+								 start_=parseInt(Math.random()*100); //随机新闻	
+				        		 channelNum  = parseInt(Math.random()*(channel.length-2)+1);//推荐随机频道
+
+					        		$.ajax({
+									type:"get",
+										url:"/wap/news/list",
+										data:{
+											channel:channel[channelNum],
+											num:num_,
+											start:10
+										},
+										async:false,
+										success:function(data){
+											getData = data.result.result.list;//object
+											for(var i=0;i<getData.length;i++){
+												if(upordown){ //
+													_self.news.push({src:getData[i].src,pic:getData[i].pic,title:getData[i].title,url:getData[i].url})
+													rememberUrl[k].push(getData[i].url); //推荐频道缓存 地址。
+												}else{
+													_self.news.unshift({src:getData[i].src,pic:getData[i].pic,title:getData[i].title,url:getData[i].url})
+													rememberUrl[k].unshift(getData[i].url); //推荐频道缓存 地址。	
+												}
+												
+											}
+											start_ +=10;
+										}
+									})
+
+				        	}else{ //用户选定
+				        		 channelNum  = k;
+				        		$.ajax({
+									type:"get",
+										url:"/wap/news/list",
+										data:{
+											channel:channel[channelNum],
+											num:num_,
+											start:start_2[k]
+										},
+										async:false,
+										success:function(data){
+											getData = data.result.result.list;//object
+											for(var i=0;i<getData.length;i++){
+												if(upordown){
+													_self.news.push({src:getData[i].src,pic:getData[i].pic,title:getData[i].title,url:getData[i].url})
+													rememberUrl[k].push(getData[i].url); //推荐频道缓存 地址。
+												}else{
+													_self.news.unshift({src:getData[i].src,pic:getData[i].pic,title:getData[i].title,url:getData[i].url})
+												    rememberUrl[k].unshift(getData[i].url); //推荐频道缓存 地址。
+												}
+											
+											}
+											start_2[k] +=10;
+										}
+									})
+				        	}
+				        },
+				
+				        issroll:function(){
+				        	 $(getId).dropload({   
+									//scrollArea很关键，要不然加载更多不起作用  
+									scrollArea : window,  
+									domUp : {  
+									    domClass   : 'dropload-up',  
+									    domRefresh : '<div class="dropload-refresh">↓下拉刷新</div>',  
+									    domUpdate  : '<div class="dropload-update">↑释放更新</div>',  
+									    domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>'  
+									},  
+									domDown : {  
+									    domClass   : 'dropload-down',  
+									    domRefresh : '<div class="dropload-refresh">↑上拉加载更多</div>',  
+									    domLoad    : '<div class="dropload-load"><span class="loading"></span>加载中...</div>',  
+									    domNoData  : '<div class="dropload-noData">暂无数据</div>'  
+									   },  
+									loadUpFn : function(me){  
+									        //下拉刷新需要调用的函数  
+
+									       vm[k].clickMore(0);
+									        //重置下拉刷新  
+									        me.resetload();      
+									},  
+									loadDownFn : function(me){  
+									        //上拉加载更多需要调用的函数  
+
+											vm[k].clickMore(1);
+									        //定时器函数,为了看出上拉加载更多效果  
+									            setTimeout(function(){  
+									                // 每次数据加载完，必须重置  
+									                    me.resetload();  
+									                },1000);  
+									           }  
+									});  	
+				        },
+				         newsUrl:function(num){ //传递地址
+				        	var url = "/wap/index_content.html?userUrl="+encodeURI(rememberUrl[k][num]);
+				        	window.location.href = url;
+				        	return false;
+				        },
+				        firstAdd:function(time){
+				        	if($('.wrapper').eq(k).attr('hadVue') !=1){ //判断事件是否为首次 。首次则初始化，绑定上下拉事件。
+								$('.waitMsg').show();
+								$(getId).hide();
+								setTimeout(function(){						
+									vm[k].issroll();
+									$(getId).show();
+									$('.waitMsg').hide();
+								},time)
+							}
+				        }
+			         }
+				})
+				//初始化 ，
+				if(k!=0){//其他频道
+					vm[k].firstAdd(100);		
+				}else{//推荐频道
+					vm[k].firstAdd(300);
+				}
+				
+				}
+			
+			
+		</script>

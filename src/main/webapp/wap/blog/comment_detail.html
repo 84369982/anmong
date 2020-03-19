@@ -1,0 +1,134 @@
+<!-- 评论  详情 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<!--解决uc更改默认字体大小-->
+	<meta name="wap-font-scale" content="no"/>
+	<title>评论详情</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/public.css"/>
+	<link rel="stylesheet" href="../static/css/blog.css" />
+	<script src="../static/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+	<script type="text/javascript" src="../static/js/index.js"></script>
+</head>
+<body>
+	<div class="viewport">
+		<div class="blog_mengceng2"></div>
+		<div style="height:0.88rem;">&nsbp;</div>
+		<!-- head -->
+		<div class="header blog_comment_header">
+			<i class="icon_back "></i>
+			<div class="comment_header_msg clearfix"><span class="comment_details_num">6</span>条回复</div>
+		</div>
+		<!-- 原回复 -->
+		<div class="one_comment  clearfix" style="display:block;">
+				<div class="little_head"><img src="../static/images/head_img_03.png" alt=""></div>
+				<div class="comment_details">
+					<div class="comment_details_name">小明</div>
+					<div class="comment_details_more clearfix">
+						<div class="comment_details_time">11-3 11:20</div>
+						<div class="comment_details_this_more clearfix">
+							<a  class="details_hf"></a>
+							<a  class="details_zan"><i></i><span class="details_zan_num">100</span></a>
+						</div>
+					</div>
+					<div class="comment_details_content">这个blog不错,</div>
+					<a href="javascript:;" onclick="history.go(-1);">查看原内容</a>
+				</div>
+		</div>
+
+		<!-- 这条回复的 回复 -->
+		<div class="this_comment_reply">
+			<div class="comment_sort_type clearfix">
+						<span>按热度</span>
+						<ul class="sort_type_list">
+							<li class="on">按热度</li>
+							<li>按时间</li>
+						</ul>
+			</div>
+			<ul class="one_comment_reply">
+				<li class="clearfix">
+					<div class="little_head"><img src="../static/images/head_img_03.png" alt=""></div>
+					<div class="comment_details">
+						<div class="comment_details_name">小明</div>
+						<div class="comment_details_more clearfix">
+							<div class="comment_details_time">11-3 11:20</div>
+							<div class="comment_details_this_more clearfix">
+								<a  class="details_zan"><i></i><span class="details_zan_num">100</span></a>
+							</div>
+						</div>
+						<div class="comment_details_content">这个blog不错,</div>
+					</div>
+				</li>
+				<li class="clearfix">
+					<div class="little_head"><img src="../static/images/head_img_03.png" alt=""></div>
+					<div class="comment_details">
+						<div class="comment_details_name">小明</div>
+						<div class="comment_details_more clearfix">
+							<div class="comment_details_time">11-3 11:20</div>
+							<div class="comment_details_this_more clearfix">
+								<a  class="details_zan"><i></i><span class="details_zan_num">100</span></a>
+							</div>
+						</div>
+						<div class="comment_details_content">这个blog不错,</div>
+					</div>
+				</li>
+				<li class="clearfix">
+					<div class="little_head"><img src="../static/images/head_img_03.png" alt=""></div>
+					<div class="comment_details">
+						<div class="comment_details_name">小明</div>
+						<div class="comment_details_more clearfix">
+							<div class="comment_details_time">11-3 11:20</div>
+							<div class="comment_details_this_more clearfix">
+								<a  class="details_zan"><i></i><span class="details_zan_num">100</span></a>
+							</div>
+						</div>
+						<div class="comment_details_content">这个blog不错,</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+
+<script>
+	/*
+	评论 排列方式 时间，热度
+	 */
+	$('.comment_sort_type span').click(function(){
+		$(this).next().show();
+		$('.blog_mengceng2').show();
+	})
+	$('.sort_type_list li').click(function(){
+		$(this).addClass('on').siblings().removeClass('on').parent().hide();
+		$('.blog_mengceng2').hide();
+		/* 选择排序方式不同则 重新排序 */
+		if($('.comment_sort_type span').html() != $(this).html()){
+			$('.comment_sort_type span').html($(this).html());
+			// 触发排序方法。
+		}
+	})
+	$('.blog_mengceng2').click(function(){
+		$(this).hide();
+		$('.sort_type_list').hide();
+	})
+
+		//动态 绑定，每条评论的点赞 type=2
+	$(document).on('click','.details_zan',function(){
+		var self= $(this);
+		var num = Number($(this).children('span').html());
+		$(this).css({"pointer-events":"none"}); //1s 内不能点击
+		if($(this).attr('hadZan') !=1){
+			$(this).attr('hadZan',1).children('span').html(num+1).siblings().css({'background-image':'url(../static/images/icon/icon_red_zan.png)'});
+		}else{
+			$(this).attr('hadZan',0).children('span').html(num-1).siblings().css({'background-image':'url(../static/images/icon/icon_zan.png)'});
+		}
+		$(this).children('i').addClass('big_zan');
+		setTimeout(function(){
+			self.css({'pointer-events':'auto'}).children('i').removeClass('big_zan');
+		},1000)
+	})
+</script>
+</html>

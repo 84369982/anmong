@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <description>apache shiro配置</description>
+
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/admin/login.html"/>
+        <property name="successUrl" value="/admin/index.jsp"/>
+        <property name="unauthorizedUrl" value="/admin/view/unauthorized.html"/>
+         <property name="filters">
+            <util:map> 
+                <entry key="hasPermission">
+                   <!--  自定义filter，实现url级别权限控制 -->
+                   <bean class="com.anmong.common.shiro.PermissionFilter"/>
+                </entry>
+            </util:map> 
+        </property>
+        <property name="filterChainDefinitions">
+            <value>
+                <!-- 静态资源允许访问/js/** 以及上传文件= anon  -->
+                /wap/** =anon
+                /public/** =anon
+                <!-- 登录页允许访问 -->
+                <!-- 其他资源需要认证 -->
+                /admin/login.html = anon
+                /admin/static/** = anon
+                /admin/view/** = anon
+                /web/auth/login = anon
+                /web/auth/logout = anon
+                <!-- 页面采用先认证，再鉴权，接口采用先鉴权，鉴权中包含认证 -->
+                /admin/** = authc,hasPermission
+                /web/** = hasPermission,authc
+           <!--      上传文件需要鉴权
+                /file/** = authc,hasPermission -->
+                <!-- /wap/** = authc,hasPermission -->
+            </value>
+        </property>
+    </bean>
+
+	   <!-- shiro securityManager -->
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+	     <property name="realm" ref="loginRealm" />   
+		<!-- Single realm app.  If you have multiple realms, use the 'realms' property instead. -->
+		
+		<!-- sessionManager -->
+		<property name="sessionManager" ref="sessionManager" />
+		
+		<!-- cacheManager -->
+		<property name="cacheManager" ref="cacheManager" />
+		
+		<!-- By default the servlet container sessions will be used.  Uncomment this line
+			 to use shiro's native sessions (see the JavaDoc for more): -->
+		<!-- <property name="sessionMode" value="native"/> -->
+	</bean>
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>	
+
+		<!-- shiro redisManager -->
+		<bean id="redisManager" class="org.crazycake.shiro.RedisManager">
+			<property name="host" value="${redis.host}"/>
+			<property name="port" value="${redis.port}"/>
+			<!-- 过期时间单位为秒 -->
+			<property name="expire" value="43200"/>
+			<!-- optional properties:-->
+			<!-- <property name="timeout" value="10000"/> -->
+			<property name="password" value="${redis.pass}"/>
+			
+		</bean>
+		
+		<!-- redisSessionDAO -->
+		<bean id="redisSessionDAO" class="org.crazycake.shiro.RedisSessionDAO">
+			<property name="redisManager" ref="redisManager" />
+		</bean>
+		
+		<!-- sessionManager -->
+		<bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+		     <!-- session的失效时长，单位毫秒这里设置的是八小时过期，此操作会覆盖web.xml文件中的超时时间配置 -->  
+           <property name="globalSessionTimeout" value="28800000"/>  
+		   <!-- 删除所有无效的Session对象，此时的session被保存在了内存里面 -->
+	       <property name="deleteInvalidSessions" value="true"/>
+	       <!-- 定义要使用的无效的Session定时调度器 -->
+	       <property name="sessionValidationScheduler" ref="sessionValidationScheduler"/>
+	       <!-- 需要让此session可以使用该定时调度器进行检测 -->
+	       <property name="sessionValidationSchedulerEnabled" value="true"/>
+			<property name="sessionDAO" ref="redisSessionDAO" />
+		</bean>
+		
+		<!-- 配置session的定时验证检测程序类，以让无效的session释放 -->
+    <bean id="sessionValidationScheduler"
+        class="org.apache.shiro.session.mgt.quartz.QuartzSessionValidationScheduler">
+        <!-- 设置session的失效扫描间隔，单位为毫秒 -->
+        <property name="sessionValidationInterval" value="3600000"/>
+        <!-- 随后还需要定义有一个会话管理器的程序类的引用 -->
+        <property name="sessionManager" ref="sessionManager"/>
+    </bean>
+		
+		<!-- cacheManager -->
+		<bean id="cacheManager" class="org.crazycake.shiro.RedisCacheManager">
+			<property name="redisManager" ref="redisManager" />
+		</bean>
+    
+     <!-- 配置进行授权和认证的 Realm -->  
+       <bean id="loginRealm" class="com.anmong.common.shiro.LoginRealm">  
+          <!--    <property name="userService" ref="userService" />   -->
+         </bean>  
+       <!--  <bean id="userService" class="com.anmong.core.service.wap.UserService" />    -->
+ 
+    <!-- Shiro生命周期处理器 -->
+    <!-- <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/> -->
+   <!--  自定义filter，实现url级别权限控制 -->
+   <bean id="permission" class="com.anmong.common.shiro.PermissionFilter"/>
+    
+</beans>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<style>
+    body {
+        TEXT-ALIGN: center;
+    }
+
+    .center {
+        MARGIN-RIGHT: auto;
+        MARGIN-LEFT: auto;
+        vertical-align: middle;
+    }
+
+    .msgBox {
+        border: 1px solid #000;
+        width: 800px;
+        height: 600px;
+        overflow:auto;
+        text-align:left;
+    }
+</style>
+
+<!--<input id="userId">
+<button id="connect">连接</button>-->
+<div id = "content"></div>
+<button id="previous">上页</button>
+<button id="next">下页</button>
+</body>
+<script type="text/javascript" src="/wap/static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/admin/static/self/js/public.js"></script>
+<script type="text/javascript">
+var array = [1,2,3,4,5];
+var pageNo = 0;
+$("#previous").click(function () {
+    $("#content").html();
+    pageNo = pageNo -1;
+    var data = pageResultReverseASC( pageNo,2,array)
+    data.forEach(function (val,index) {
+        $("#content").append('<p>'+val+'</p>')
+    })
+})
+
+$("#next").click(function () {
+    $("#content").html();
+    pageNo = pageNo +1;
+    var data = pageResultReverseASC(pageNo,2,array)
+    data.forEach(function (val,index) {
+        $("#content").append('<p>'+val+'</p>')
+    })
+})
+
+</script>
+
+</html>

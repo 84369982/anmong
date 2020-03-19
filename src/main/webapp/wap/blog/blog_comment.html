@@ -1,0 +1,577 @@
+<!-- 微博评论 正文 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<!--解决uc更改默认字体大小-->
+	<meta name="wap-font-scale" content="no"/>
+	<title>评论</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/public.css"/>
+	<link rel="stylesheet" href="../static/css/blog.css" />
+	<script src="../static/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+	<script type="text/javascript" src="../static/js/index.js"></script>
+</head>
+<body>
+	<div class="viewport blog_comment">
+
+		<div class="blog_mengceng2"></div>
+		<div style="height:0.88rem;">&nsbp;</div>
+		<div class="header blog_comment_header">
+			<i class="icon_back"></i>
+			<div class="comment_header_msg clearfix"><h4>微博正文</h4></div>
+			<i class="icon_share"></i>
+		</div>
+		<div class="blog_comment_body">
+			<div class="blog_part">
+				<div class="blog_part_head clearfix">
+					<div class="person_head_img"><img src="../static/images/head_img_03.png" alt=""><i class="blog_icon_v"></i></div>
+					<div class="person_head_msg">
+						<h4 class="person_name">读书语录<i class="blog_icon_hg6"></i></h4>
+						<p><span class="blog_time">1分钟前</span>来自 <span class="blog_src">微博 weibo.com</span></p>
+					</div>
+					<div class="blog_this_collect"></div>
+				</div>
+				<div class="blog_part_body">
+					<p>感谢少时<em>@小明</em><em>@小红</em>少时诵诗所所所</p>
+					<div class="blog_img">
+						<img src="../static/images/blog_img_03.jpg" alt="">
+					</div>
+				</div>	
+			</div>
+			<div class="blog_comment_check">
+				<ul class="comment_check_nav clearfix ">
+					<li class="comment_zf_man">转发<span class="comment_zf_num">5</span></li>
+					<li class="on comment_pl_man">评论<span class="comment_pl_num">15</span></li>
+					<li class="comment_dz_man">赞<span class="comment_zan_num">320</span></li>
+				</ul>
+				<!-- 转发 -->
+				<div class="comment_check_body  comment_zf">
+					<ul>
+						<li class="clearfix">
+							<div class="little_head"><img src="../static/images/head_img_03.png" alt=""></div>
+							<div class="comment_details">
+								<div class="comment_details_name">小明</div>
+								<div class="comment_details_content">转发微博</div>
+								<div class="comment_details_more clearfix">
+									<div class="comment_details_time">11-3 11:20</div>
+								</div>
+							</div>
+						</li>
+						<li class="clearfix">
+							<div class="little_head"><img src="../static/images/head_img_03.png" alt=""></div>
+							<div class="comment_details">
+								<div class="comment_details_name">小明</div>
+								<div class="comment_details_content">转发微博</div>
+								<div class="comment_details_more clearfix">
+									<div class="comment_details_time">11-3 11:20</div>
+								</div>
+							</div>
+						</li>
+						<li class="clearfix">
+							<div class="little_head"><img src="../static/images/head_img_03.png" alt=""></div>
+							<div class="comment_details">
+								<div class="comment_details_name">小明</div>
+								<div class="comment_details_content">转发微博</div>
+								<div class="comment_details_more clearfix">
+									<div class="comment_details_time">11-3 11:20</div>
+								</div>
+							</div>
+						</li>
+						<li class="clearfix">
+							<div class="little_head"><img src="../static/images/head_img_03.png" alt=""></div>
+							<div class="comment_details">
+								<div class="comment_details_name">小明</div>
+								<div class="comment_details_content">转发微博</div>
+								<div class="comment_details_more clearfix">
+									<div class="comment_details_time">11-3 11:20</div>
+								</div>
+							</div>
+						</li>
+						<li class="clearfix">
+							<div class="little_head"><img src="../static/images/head_img_03.png" alt=""></div>
+							<div class="comment_details">
+								<div class="comment_details_name">小明</div>
+								<div class="comment_details_content">转发微博</div>
+								<div class="comment_details_more clearfix">
+									<div class="comment_details_time">11-3 11:20</div>
+								</div>
+							</div>
+						</li>
+						<li class="clearfix">
+							<div class="little_head"><img src="../static/images/head_img_03.png" alt=""></div>
+							<div class="comment_details">
+								<div class="comment_details_name">小明</div>
+								<div class="comment_details_content">转发微博</div>
+								<div class="comment_details_more clearfix">
+									<div class="comment_details_time">11-3 11:20</div>
+								</div>
+							</div>
+						</li>
+
+					</ul>
+				</div>
+
+				<!-- 评论 排序方式 小头像，详情（姓名，内容，时间）-->
+				<div class="comment_check_body comment_pl active">
+					<div class="comment_sort_type clearfix">
+						<span>按热度</span>
+						<ul class="sort_type_list">
+							<li class="on" orderby="dz">按热度</li>
+							<li orderby="time">按时间</li>
+						</ul>
+					</div>
+					<ul>
+						<li class="clearfix" v-for="(value, index) in comments" >
+							<div class="little_head"><img :src="value.headUrl" alt=""></div>
+							<div class="comment_details">
+								<div class="comment_details_name">{{value.createMan}}</div>
+								<div class="comment_details_content">{{value.content}}</div>
+								<template v-if="value.parentCommentList.length != 0">
+									<div class="comment_reply">
+										<a href="comment_detail.html">
+											<p class="comment_reply_content" v-for="(value2,index2) in value.parentCommentList" v-if="index2 < 3"><span class="comment_reply_name">{{value2.createMan}}:</span>{{value2.content}}</p>
+											<a href="comment_detail.html" class="replay_more">共<span class="comment_reply_num">{{value.parentCommentList.length}}</span>条回复></a>
+										</a>
+									</div>
+								</template>
+								<div class="comment_details_more clearfix">
+									<div class="comment_details_time">{{value.createAt}}</div>
+									<div class="comment_details_this_more clearfix">
+										<a  class="details_zf"></a>
+										<a  class="details_hf"></a>
+										<a  class="details_zan"><i></i><span class="details_zan_num">{{value.likeQuantity}}</span></a>
+									</div>
+								</div>
+							</div>
+
+						</li>
+
+
+						<!--	<li class="clearfix">
+                                <div class="little_head"><img src="../static/images/head_img_03.png" alt=""></div>
+                                <div class="comment_details">
+                                    <div class="comment_details_name">小明</div>
+                                    <div class="comment_details_content">这个blog不错,呀呀呀呀呀呀呀啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</div>
+                                    <div class="comment_reply">
+                                        <a href="comment_detail.html">
+                                            <p class="comment_reply_content"><span class="comment_reply_name">小红:</span>哈哈哈哈三生三世哈哈哈哈三生三世哈哈哈哈三生三世哈哈哈哈三生三世哈哈哈哈三生三世</p>
+                                            <p class="comment_reply_content"><span class="comment_reply_name">小红:</span>哈哈哈哈三生三世哈哈哈哈</p>
+                                            <a href="comment_detail.html" class="replay_more">共<span class="comment_reply_num">10</span>条回复></a>
+                                        </a>
+                                    </div>
+                                    <div class="comment_details_more clearfix">
+                                        <div class="comment_details_time">11-3 11:20</div>
+                                        <div class="comment_details_this_more clearfix">
+                                            <a  class="details_zf"></a>
+                                            <a  class="details_hf"></a>
+                                            <a  class="details_zan"><i></i><span class="details_zan_num">100</span></a>
+                                        </div>
+                                    </div>
+                                    </div>
+                            </li>
+                            <li class="clearfix">
+                                <div class="little_head"><img src="../static/images/head_img_03.png" alt=""></div>
+                                <div class="comment_details">
+                                    <div class="comment_details_name">小明</div>
+                                    <div class="comment_details_content">这个blog不错,</div>
+                                    <div class="comment_details_more clearfix">
+                                        <div class="comment_details_time">11-3 11:20</div>
+                                        <div class="comment_details_this_more clearfix">
+                                            <a  class="details_zf"></a>
+                                            <a  class="details_hf"></a>
+                                            <a  class="details_zan"><i></i><span class="details_zan_num">100</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>  -->
+					</ul>
+				</div>
+				<!-- 点赞人员 -->
+				<div class="comment_check_body comment_dz">
+					<ul>
+						<li class="clearfix">
+							<div class="little_head"><img src="../static/images/head_img_03.png" alt=""></div>
+							<div class="comment_details_zan">
+								<div class="comment_details_name">小明</div>
+							</div>
+						</li>
+						<li class="clearfix">
+							<div class="little_head"><img src="../static/images/head_img_03.png" alt=""></div>
+							<div class="comment_details_zan">
+								<div class="comment_details_name">小红</div>
+							</div>
+						</li>
+						<li class="clearfix">
+							<div class="little_head"><img src="../static/images/head_img_03.png" alt=""></div>
+							<div class="comment_details_zan">
+								<div class="comment_details_name">小明</div>
+							</div>
+						</li>
+						<li class="clearfix">
+							<div class="little_head"><img src="../static/images/head_img_03.png" alt=""></div>
+							<div class="comment_details_zan">
+								<div class="comment_details_name">小明</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			
+		</div>
+	
+		<div class="blog_comment_footer">
+			<ul class="blog_part_down clearfix">
+				<li class="blog_repeat"><i></i><p>转发</p></li>
+				<li class="blog_discuss"><i></i><p>评论</p></li>
+				<li class="blog_zan"><i></i><p class="blog_zan_num">赞</p></li>
+			</ul>
+		</div>
+		<div style="height:1.88rem;"></div>
+	</div>
+</body>
+<script src="../static/js/isLogin.js"></script>
+<script src="../static/js/vue.min.js"></script>
+
+<script>
+
+
+	$(function(){
+	    var thisBlog = '';//当前微博
+        var commentLists = '';//用来记录评论
+        var user =JSON.parse(window.localStorage.getItem('user'));
+		isTop();
+		$(document).scroll(function(){
+			isTop();
+		})
+		/*
+		rel 用来设置 高度0.88rem的块元素 来撑开 定位后不占高度的 fixed. 只有第一次才添加。
+		 */
+		function isTop(){
+			var mTop=$('.blog_part').height()+$('.blog_comment_header').height();
+			var st='<div style="height:0.88rem" class="scroll_head">'+"&nsbp;"+'</div>'
+			if($(document).scrollTop() > mTop){
+				$('.comment_check_nav').addClass('comment_check_nav_fixed');
+				if($('.comment_check_nav').attr('rel')!=1){
+					$('.comment_check_body').prepend(st);
+					$('.comment_check_nav').attr('rel',1);
+				}
+			}else{
+				$('.comment_check_nav').removeClass('comment_check_nav_fixed');
+				$('.comment_check_nav').attr('rel',0);
+				$('.scroll_head').remove();
+			}
+		}
+
+		$.ajax({//blog内容
+			url:'/wap/article/find-one',
+			type:'get',
+			data:{
+			    id:getQueryString('id'),
+			},
+			async:false,
+			success:function(data) {
+				if(data.success){
+				    console.log(data.collection[0]);
+				    thisBlog = data.collection[0];
+                    putOneBlog(data.collection[0]);
+				}else{
+				    showBackMsg2(data.message);
+				}
+            }
+		})
+        function putOneBlog(oneData){//内容模板
+            var oneContent ='<div class="blog_part_head clearfix">'+
+                '<div class="person_head_img"><img src="'+oneData.headUrl+'" alt=""><i class="blog_icon_v"></i></div>'+
+                '<div class="person_head_msg">'+
+                '<h4 class="person_name">'+oneData.createMan+'<i class="blog_icon_hg6"></i></h4>'+
+                '<p><span class="blog_time">'+oneData.createAt+'</span></p>'+
+                '</div>'+
+                '<div class="blog_this_collect"></div>'+
+                '</div>'+
+                '<div class="blog_part_body">'+oneData.txt+'</div>';
+                $('.blog_comment_body .blog_part').html('').append(oneContent);
+                $('.comment_pl_num').html(oneData.commentQuantity );//评论量
+          	    $('.comment_zf_num').html(oneData.forwardQuantity );//转发量
+           	    $('.comment_zan_num').html(oneData.likeQuantity );//点赞量
+
+        }
+        function addComments(allData,e){//vue数据绑定
+		    e.comments = [];
+            for(var i=0;i<allData.length;i++){
+                // var obj = {headUrl:allData[i].headUrl,content:allData[i].content,createAt:allData[i].createAt,createMan:allData[i].createMan,likeQuantity:allData[i].likeQuantity,parentCommentList:allData[i].parentCommentList};
+                e.comments.push(allData[i]);
+            }
+        }
+        function sortByDz(arr){//排序 按点击量
+            for(var i = 0;i<arr.length-1;i++){
+                for(var j = 0;j<arr.length-1-i;j++){
+                    if(arr[j].likeQuantity < arr[j+1].likeQuantity){//从大到小排序
+                        var temp ;
+                        temp = arr[j+1];
+                        arr[j+1] = arr[j];
+                        arr[j] = temp;
+                    }
+                }
+            }
+            return arr;
+        }
+        function sortByTime(arr){//排序 按时间
+            for(var i = 0;i<arr.length-1;i++){
+                for(var j = 0;j<arr.length-1-i;j++){
+                    if(arr[j].createAt < arr[j+1].createAt){//从大到小排序
+                        var temp ;
+                        temp = arr[j+1];
+                        arr[j+1] = arr[j];
+                        arr[j] = temp;
+                    }
+                }
+            }
+            return arr;
+		}
+        //评论vue数据绑定
+        var commentVue = new Vue({
+			el:'.comment_pl',
+			data:{comments:[]},
+            methods:{
+			    moreComments:function () {
+					var _self = this;
+					$.ajax({
+						url:'/wap/comment/find-all',
+						type:'get',
+						data:{
+                            articleId:getQueryString('id'),
+						},
+						success:function (data) {
+							if(data.success){
+                                commentLists = data.collection;
+                                console.log(commentLists);
+                                sortByDz(commentLists);//按点击量排序
+							  addComments(commentLists,_self);
+							}else{
+							    showBackMsg2(data.message);
+							}
+                        }
+					})
+                }
+			}
+		})
+		commentVue.moreComments();
+        /*
+		评论 排列方式 时间，热度
+		 */
+        $(document).on('click','.comment_sort_type span',function () {
+            $(this).next().show();
+            $('.blog_mengceng2').show();
+            $('.blog_mengceng2').click(function(){
+                $(this).hide();
+                $('.sort_type_list').hide();
+            })
+        })
+        $(document).on('click','.sort_type_list li',function () {
+            $(this).addClass('on').siblings().removeClass('on').parent().hide();
+            $('.blog_mengceng2').hide();
+            /* 选择排序方式不同则 重新排序 */
+            if($('.comment_sort_type span').html() != $(this).html()){
+                $('.comment_sort_type span').html($(this).html());
+                if($(this).attr('orderby')== 'time'){//按日期排序
+                    // 触发排序方法。。。先排序，再绑定vue 数据
+                    sortByTime(commentLists);
+                    addComments(commentLists,commentVue);
+                }else{//按点击量排序
+                    sortByDz(commentLists);
+                    addComments(commentLists,commentVue);
+                }
+
+            }
+        })
+
+		/*
+		点赞人员列表 ajax
+		 */
+		$('.comment_dz_man').click(function () {
+            var  dzman = '<ul>' +
+					'<li class="clearfix" v-for="(value, key) in dzs">'+
+					'<div class="little_head"><img :src="value.headUrl" alt=""></div>'+
+					' <div class="comment_details_zan">'+
+					'<div class="comment_details_name">'+'{{value.createMan}}'+'</div>'+
+					' </div>'+
+					'</li>'+
+				'</ul>';
+            $('.comment_dz').html('').append(dzman);
+            //点赞人员 vue数据绑定
+            var dzVue = new Vue({
+                el:'.comment_dz',
+                data:{dzs:[]},
+                methods:{
+                    dzList:function(){
+                        var _self =this;
+                        $.ajax({
+                            type:'get',
+                            url:'/wap/like/find-like-info',
+                            data:{articleId:getQueryString('id')},
+                            success:function (data) {
+                                if(data.success){
+                                    for(var i=0;i<data.collection.length;i++){
+                                        _self.dzs.push(data.collection[i]);
+                                    }
+                                }else{
+                                    showBackMsg(data.message);
+                                }
+                            }
+                        })
+                    }
+                }
+            })
+            dzVue.dzList();
+        })
+		/*
+		评论人员列表  ajax
+		 */
+		$('.comment_zf_man').click(function () {
+			var zfman = '<ul>' +
+                '<li class="clearfix" v-for="(value, key) in zfs">'+
+               	 '<div class="little_head"><img :src="value.headUrl" alt=""></div>'+
+					'<div class="comment_details">'+
+					'<div class="comment_details_name">'+'{{value.createMan}}'+'</div>'+
+					'<div class="comment_details_content">'+'{{value.comment}}'+'</div>'+
+					'<div class="comment_details_more clearfix">'+
+					' <div class="comment_details_time">'+'{{value.createAt}}'+'</div>'+
+					'</div>'+
+           		 '</div>'+
+                '</li>'+
+                '</ul>';
+			$('.comment_zf').html('').append(zfman);
+            //转发人员 vue数据绑定
+            var zfVue = new Vue({
+                el:'.comment_zf',
+                data:{zfs:[]},
+                methods:{
+                    zfList:function(){
+                        var _self =this;
+                        $.ajax({
+                            type:'get',
+                            url:'/wap/article-forward/find-forward-info',
+                            data:{articleId:getQueryString('id')},
+                            success:function (data) {
+                                if(data.success){
+                                    for(var i=0;i<data.collection.length;i++){
+                                        _self.zfs.push(data.collection[i]);
+                                    }
+                                    console.log(data.collection);
+                                }else{
+                                    showBackMsg(data.message);
+                                }
+                            }
+                        })
+                    }
+                }
+            })
+            zfVue.zfList();
+        })
+
+        $('.comment_check_nav li').click(function(){
+            var index_ = $('.comment_check_nav li').index($(this));
+            $(this).addClass('on').siblings().removeClass('on');
+            $('.comment_check_body').eq(index_).addClass('active').siblings().removeClass('active');
+        })
+        //动态 绑定，每条评论的点赞
+        $(document).on('click','.details_zan',function(){
+            var self= $(this);
+            var num = Number($(this).children('span').html());
+            $(this).css({"pointer-events":"none"}); //1s 内不能点击
+            if($(this).attr('hadZan') !=1){
+                $(this).attr('hadZan',1).children('span').html(num+1).siblings().css({'background-image':'url(../static/images/icon/icon_red_zan.png)'});
+            }else{
+                $(this).attr('hadZan',0).children('span').html(num-1).siblings().css({'background-image':'url(../static/images/icon/icon_zan.png)'});
+            }
+            $(this).children('i').addClass('big_zan');
+            setTimeout(function(){
+                self.css({'pointer-events':'auto'}).children('i').removeClass('big_zan');
+            },1000)
+        })
+        $('.blog_zan').click(function(){
+            var self = $(this);
+            $(this).css({"pointer-events":"none"}); //1s 内不能点击
+            console.log(dzAjax());
+				if(dzAjax() == 1){
+
+                    $(this).attr('hadZan',1).children('i').css({'background-image':'url(../static/images/icon/icon_red_zan.png)'});
+                    $('.comment_zan_num').html(Number($('.comment_zan_num').html())+1);
+				}else{
+                    $(this).attr('hadZan',0).children('i').css({'background-image':'url(../static/images/icon/icon_zan.png)'});
+                    $('.comment_zan_num').html(Number($('.comment_zan_num').html())-1);
+				}
+
+            $(this).children('i').addClass('big_zan');
+            setTimeout(function(){
+                self.css({'pointer-events':'auto'}).children('i').removeClass('big_zan');
+            },1000)
+
+
+        })
+			function dzAjax(){
+				var result = '';
+				//ajax
+				var data = {bizId:thisBlog.id,createMan:user.id,type:2};
+				console.log(data);
+				$.ajax({
+					type:'post',
+					url:'/wap/like/add',
+					data:JSON.stringify(data),
+					contentType:"application/json",
+					dataType:"json",
+					success:function (data) {
+						if(data.success){
+							console.log(data.collection[0].result);
+						   resut = data.collection[0].result;
+						}else{
+							showBackMsg(data.message);
+						}
+					}
+				})
+
+				return result;
+			}
+    })
+
+
+
+	$(document).on('click','.comment_details',function(){
+		var self=$(this);
+		//仿 active,这样不支持点击拖动
+		$(this).parent().addClass('li_active');
+	    setTimeout(function(){  
+	        self.parent().removeClass('li_active');  
+	    }, 200);  
+		
+		var name = $(this).children('.comment_details_name').html();
+		var content=$(this).children('.comment_details_content').html();
+		var more='<div class="comment_details_moreChoose">'+
+				'<p class="ellipsis-2"><span>'+name+":"+'</span>'+content+'</p>'+
+				'<a class="details_hf">'+"回复"+'</a>'+
+				'<a class="details_zf">'+"转发"+'</a>'+
+				'<a class="details_fz">'+"复制"+'</a>'+
+				'<a class="details_jb">'+"举报"+'</a>'+'</div>';
+		if($(this).attr('hadMore')!=1){ //首次添加
+			$(this).attr('hadMore',1).append(more);
+		}
+		$('.blog_mengceng2').show();
+		$(this).children('.comment_details_moreChoose').show();	
+		$('.blog_mengceng2').click(function(){
+			$(this).hide();
+			self.children('.comment_details_moreChoose').hide();
+		})
+	})
+	$(document).on('click','.comment_reply',function(event){
+	  	  event.stopPropagation();//阻止事件冒泡,不触发父元素
+	});
+	$(document).on('click','.comment_details_more',function(event){
+	  	  event.stopPropagation();
+	});
+
+
+	
+</script>
+</html>

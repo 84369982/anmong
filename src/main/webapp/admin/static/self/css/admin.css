@@ -1,0 +1,8 @@
+@charset "UTF-8";
+
+.personMessages{width:100%;padding:20px 0 ;text-align:center;background:#fff;}
+.header_img{position:relative;overflow:hidden;border-radius:50%;width:75px;height:75px;margin:0 auto}
+.header_img img{width:auto;height:auto;position: absolute;left: 50%;top: 50%;-webkit-transform: translate(-50%,-50%);transform: translate(-50%,-50%);}
+
+.personMessages h4{margin:5px 0;color:#333;font-size:14px;}
+.personMessages>a{display:block;font-size:14px;color:#ccc;}

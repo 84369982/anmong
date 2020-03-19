@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<!--解决uc更改默认字体大小-->
+	<meta name="wap-font-scale" content="no"/>
+	<title>web</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/swiper.min.css"/>
+	<link rel="stylesheet" type="text/css" href="../static/css/public.css"/>
+	<link rel="stylesheet" href="../static/css/index.css" />
+	<script src="../static/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+	<script src="../static/js/swiper.min.js " type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body style="padding-bottom: 0;">
+	 	<div class="viewport article2_content">
+	 		<div class="article1_body_top article2_header clearfix">
+					<span class="come_img"><img src="../static/images/head_img_03.png" alt="" /></span>
+					<div class="come_title">
+						<h4>女人的心说</h4>
+						<span class="news_come">百家号</span>				
+					</div>
+					<i class="article2_content_more"></i>
+					<i class="rubbish"></i>
+					<div class="article2_like">
+						<i class="article2_like_icon"></i>
+						<span class="article2_num">99999</span>
+					</div>
+	 		</div>
+	 		<!--swiper-->
+			<div class="article2 swiper-container">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide">
+							<img src="../static/images/ad1_03.jpg">
+							<div class="article2_cont clearfix">
+								 容内容内容内容内容内容内容内容内容容内容内容内容内容内容容内容内容内容内容内容容内容内容内容内容内容容内容内容内容内容内容容内容内容内容内容内容容内容内容内容内容内容容内容内容内容内容内容容内容内容内容内容内容容内容内容内容内容内容容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<img src="../static/images/banner_02.jpg">
+							<div class="article2_cont clearfix">
+								内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<img src="../static/images/news2_05.png">
+							<div class="article2_cont clearfix">
+								内容内容内容内容内容内容内容内容内容容内容内容内容内容内容内容内容内容内容内内容内容内容内容内容内容内容内容内容
+							</div>
+						</div>
+						<div class="swiper-slide">
+							<img src="../static/images/banner_02.jpg">
+							<div class="article2_cont clearfix">
+								内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+							</div>
+						</div>
+					</div>
+			</div>
+		
+
+			<!--footer_article1-->
+				<div class="footer_article1 clearfix footer_article2">
+					<i class="icon_back"></i>
+					<input type="text" placeholder="我来说两句" class="icon_speak"/>
+					<i class="icon_discuss"><span>10</span></i>
+					<i class="icon_like"></i>
+					<i class="icon_share"></i>
+				</div>
+	 	</div>
+			
+			<!--swiper-->
+			
+		<script>
+			var swiper = new Swiper('.swiper-container', {
+				pagination: '.swiper-pagination',
+				paginationClickable: true,
+				spaceBetween: 10,
+				centeredSlides: true,
+				autoplay: false,
+				autoplayDisableOnInteraction: false
+			});
+		</script>
+		<script type="text/javascript">
+
+			//页面高度
+			setPageHeight();
+			function setPageHeight(){
+				var height_= $(document).height();
+				$('.article2_content').height(height_);
+				$('.article2').height(height_);
+			}
+					
+			//收藏
+			$('.icon_like').click(function(){
+					if($(this).attr('rel') != 1){
+						$(this).css({"background":"url(../static/images/icon/footer_star_on.png) center center no-repeat","background-size":'100%'});
+						$(this).attr('rel',1);
+					}else{
+						$(this).css({"background":"url(../static/images/icon/footer_star.png) center center no-repeat","background-size":'100%'});
+						$(this).attr('rel',0);
+					}
+				})
+		
+			//点赞
+			$('.article2_like').click(function(){
+					if($(this).attr('col')!=1){
+						$(this).children('i').css({"background":"url(../static/images/icon/icon_red_zan.png) center center no-repeat","background-size":'45%','--webkit-animation':'like 0.5s forwards ease-in','animation':"like 0.5s forwards ease-in"});
+						$(this).attr('col',1);
+						$(this).children('span').css({'color':'#FF7475'}).html(Number($('.article2_num').html())+1);
+					}else{
+							var had_zan = '<span class="zan_mid">'+"你已赞过"+'</span>';
+							$('body').append(had_zan);
+							//只有第一次触发 清除指令。
+							if($('.zan_mid').length == 1){
+								var t1 = setTimeout(function(){
+									$('.zan_mid').remove();
+								},5000)
+							}							
+				}
+				})
+				
+				//轮播图的角标
+				setNum();
+				function setNum(){
+					$('.article2_cont').each(function(){
+					var span_ = '<span class="article2_this_num"></span>'+'<span>'+'/'+'</span>'+'<span class="article2_all_num"></span>';
+						//prepend 在选中元素前添加，append 之后添加
+						$(this).prepend(span_);
+					})
+					$('.article2_this_num').each(function(){
+						var index_ = $('.article2_this_num').index($(this));
+						$(this).html(index_+1);
+					})
+					$('.article2_all_num').each(function(){
+						$(this).html($('.article2_all_num').length);
+					})
+				}
+		</script>
+	</body>
+</html>

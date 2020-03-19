@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<!--解决uc更改默认字体大小-->
+	<meta name="wap-font-scale" content="no"/>
+	<title>游戏平台</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/public.css"/>
+	<link rel="stylesheet" href="../static/css/index.css" />
+	<script src="../static/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+	<style>
+		body iframe{
+			width: 100%;border: 0;position: fixed;left: 0;top:0;
+		}
+		@media screen and (orientation:portrait) {
+			body .footer{display: block;}
+		}
+			@media screen and (orientation:landscape) {
+			body .footer{display: none;}
+		}
+		.pt_list a{width: 50%;float: left;}
+		.pt_list a img{width: 100%;}
+	</style>
+	</head>
+	<body>
+			<div class="viewport">
+				<div class="game_head"><img src="../static/images/logo.png.png" alt="" /></div>
+				<div class="clearfix pt_list">
+					<!--<a href="https://m.douyu.com/"><img src="../static/images/dy.jpg" alt="斗鱼tv"/></a>
+					<a href="http://m.huya.com/"><img src="../static/images/hy.jpg" alt="虎牙tv"/></a>
+					<a href="http://m.quanmin.tv/"><img src="../static/images/qm.jpg" alt="全名直播"/></a>
+					<a href="http://m.zhanqi.tv/"><img src="../static/images/zq.jpg" alt="战旗tv"/></a>
+					<a href="http://m.quanmin.tv/"><img src="../static/images/hm.jpg" alt="火猫直播"/></a>
+					<a href="https://chushou.tv/m-home.htm"><img src="../static/images/cs.jpg" alt="触手tv"/></a>
+					<a href="http://m.quanmin.tv/"><img src="../static/images/qm.jpg" alt="熊猫tv"/></a>
+					<a href="https://chushou.tv/m-home.htm"><img src="../static/images/zq.jpg" alt="龙珠tv"/></a>-->
+					<a href="javascript:;"><img src="../static/images/dy.jpg" alt="斗鱼tv"/></a>
+					<a href="javascript:;"><img src="../static/images/hy.jpg" alt="虎牙tv"/></a>
+					<a href="javascript:;"><img src="../static/images/qm.jpg" alt="全名直播"/></a>
+					<a href="javascript:;"><img src="../static/images/zq.jpg" alt="战旗tv"/></a>
+					<a href="javascript:;"><img src="../static/images/hm.jpg" alt="火猫直播"/></a>
+					<a href="javascript:;"><img src="../static/images/cs.jpg" alt="触手tv"/></a>
+					<a href="javascript:;"><img src="../static/images/qm.jpg" alt="熊猫tv"/></a>
+					<a href="javascript:;"><img src="../static/images/zq.jpg" alt="龙珠tv"/></a>
+				</div>
+				<div style="height: 4rem;"></div>
+				<div class="down">
+						<a href="http://www.miibeian.gov.cn">版权所有 © anmong 蜀ICP备17032039号</a>
+					</div>
+		</div>
+		<!--尾部-->
+		<div class="footer">
+				<ul class="clearfix">
+					<li class="on">
+					<a href="/wap/index.html">
+						<i class="footer_home"></i>
+						<p>首页</p>
+					</a>
+				</li>
+			<!-- 	<li>
+					<a href="javascript:;">
+						<i class="footer_home"></i>
+						<p>贴吧</p>
+					</a>
+				</li>
+				<li>
+					<a href="/wap/game/game.html">
+						<i class="footer_home"></i>
+						<p>游戏</p>
+					</a>
+				</li> -->
+				<li>
+					<a href="/wap/live/watch.html">
+						<i class="footer_home"></i>
+						<p>直播</p>
+					</a>
+				</li>
+				<li>
+					<a href="/wap/blog/index.html">
+						<i class="footer_home"></i>
+						<p>动态</p>
+					</a>
+				</li>
+			<!-- 	<li>
+					<a href="javascript:;">
+						<i class="footer_home"></i>
+						<p>好友</p>
+					</a>
+				</li> -->
+				<li>
+					<a href="/wap/my/index.html">
+						<i class="footer_home"></i>
+						<p>我的</p>
+					</a>
+				</ul>
+		</div>
+		
+		<script type="text/javascript">
+
+			$('.pt_list a').click(function(){
+					//iframe
+					$('.viewport').addClass('amNone');		
+					$('body').children('#ifm').remove();
+					var index = $('.pt_list a').index($(this));
+					switch (index){
+						case 0:
+							var iframe_= '<iframe src="https://m.douyu.com/" id="ifm"></iframe>';
+							break;
+						case 1:
+							var iframe_= '<iframe src="http://m.huya.com/" id="ifm"></iframe>';
+							break;
+						case 2:
+							var iframe_= '<iframe src="http://m.quanmin.tv/" id="ifm"></iframe>';
+							break;
+						case 3:
+							var iframe_= '<iframe src="http://m.zhanqi.tv/"" id="ifm"></iframe>';
+							break;
+						case 4:
+							var iframe_= '<iframe src="http://m.quanmin.tv/" id="ifm"></iframe>';
+							break;
+						case 5:
+							var iframe_= '<iframe src="https://chushou.tv/m-home.htm" id="ifm"></iframe>';
+							break;
+						default:
+							break;
+					}
+					$('body').prepend(iframe_);
+					$('#ifm').height($(window).height()+20);
+				})
+
+		
+	</script>
+	</body>
+</html>

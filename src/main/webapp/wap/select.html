@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" type="text/css" href="static/css/public.css"/>
+<style type="text/css"> 
+ 
+		
+.box{background: #ccc;width: 100px;height: 100px;margin: 100px;}
+body,ul,li{ margin:0; padding:0; font-size:13px;opacity: 1}
+ul,li{list-style:none;}
+i{font-style: normal;}
+#divselect{width:186px; margin:80px auto; position:relative; z-index:10000;}
+#divselect .cite{width:150px; height:24px;line-height:24px; display:block; color:#333; cursor:pointer;font-style:normal;
+padding-left:4px; padding-right:30px; border:1px solid #333333; }
+#divselect ul{width:184px;border:1px solid #333333; background-color:#ffffff; position:absolute; z-index:20000; margin-top:-1px; display:none;}
+#divselect  li{height:24px; line-height:24px;padding-left: 5px;}
+
+	</style>
+</head>
+<body>
+	
+		<div id="divselect">
+		      <div class="cite">请选择特效分类</div>
+		      <ul>
+		      </ul>
+	   </div>
+	  
+	   <input type="hidden" value="" id="theHide">
+	    <div class="box">12323<div class="switch"></div></div>
+	    
+	    
+	    <div>
+	      <form action="/upload/file/upload" method="post" enctype="multipart/form-data">
+	          <!-- type:文件类型:1图片;2视频;3音频 -->
+	          <input type="hidden" name="type" value="1" />
+	          <!-- module:所属模块:1图片;2视频;3音频 -->
+	          <input type="hidden" name="module" value="user" />
+	          <!--  用户id -->
+	          <input type="hidden" name="userId" value="ab0eed4f9c2011e799de00163e1c84ea" />
+	          <input type="hidden" name="name" value="测试上传" />
+	          <input type="file" name="file" multiple="multiple"/>
+	          <!-- <input type="file" name="file" /> -->
+	          <input type="submit" value="上传"/>
+	      </form>
+	    
+	    </div>
+	<script src="../wap/static/js/jquery-3.2.1.min.js"></script>
+
+	<script type="text/javascript">
+		//array 是所有列表 数组;
+		var array = new Array();
+		 array[0] = new Object();
+		 array[1] = new Object();
+		array[0].icon = "&#xe625";
+		array[0].text = "首页";
+		array[0].class = "Hui-iconfont";
+
+		array[1].icon = "&#xe165";
+		array[1].text = "尾页";
+		array[1].class = "Hui-iconfont";
+
+
+		for(var i=0;i<array.length;i++){
+			var getVal = array[i].icon.substr(2); //去掉前两个字符
+			console.log(getVal);
+			
+			var li = '<li value='+getVal+'>'+
+					'<i class='+array[i].class+'>'+array[i].icon+'</i>'+array[i].text+"</li>";
+
+			$('#divselect ul').append(li);
+		}
+
+		$('#divselect .cite').click(function(){
+			var ul = $('#divselect ul');
+			if(ul.css("display")=="none"){
+		            ul.slideDown("fast");
+	        }else{
+	            ul.slideUp("fast");
+	        }
+		})
+		
+		$('#divselect ul li').click(function(){
+			$('#divselect .cite').html($(this).html());
+			
+			$('#theHide').val($(this).attr('value'));
+
+			$("#divselect ul").hide();
+		})
+	</script>
+</body>
+</html>

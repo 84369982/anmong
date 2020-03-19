@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<!--解决uc更改默认字体大小-->
+	<meta name="wap-font-scale" content="no"/>
+	<title>登录</title>
+	<link rel="stylesheet" type="text/css" href="/wap/static/css/public.css"/>
+	<link rel="stylesheet" type="text/css" href="static/css/index.css" />
+	<script src="/wap/static/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="/wap/static/js/common.js"></script>
+	<script src="/wap/static/js/index.js" type="text/javascript" charset="utf-8"></script>
+	
+	</head>
+	<body style="background: #f7f7f7;">
+		<div class="viewport login">
+			<div style="height: 0.9rem;">&nbsp;</div>
+			<div class="login_header header clearfix">
+				<i class="icon_close"></i>
+				<p>登录</p>
+			</div>
+			
+			<div class="login_body">
+				<ul class="login_style clearfix">
+					<li class="on">账号登录</li>
+					<li>短信登录</li>
+				</ul>
+				<div class="login_check login1">
+					<form action="" method="post" onsubmit="return checkSubmit();">
+						<div class="login1_top">
+							<div class="login1_img"><img src="static/images/logo.png.png"/></div>
+						</div>
+						<div class="login1_name">
+							<span>账号</span>
+							<input type="text" name="name" id="name" placeholder="anmong账号/手机号"/>
+							<div class="login_hide"></div>
+							<div class="login_reset"></div>
+						</div>
+						<div class="login1_pwd">
+							<span>密码</span>
+							<input type="password" name="password" id="password" placeholder="请填写密码"/>
+							<div class="login_hide"></div>
+							<div class="login_reset"></div>
+							<span class="eye"></span>
+						</div>
+						<div class="login_twm" style="display: none;">
+							<span>图文码</span>
+							<input type="text" name="twm" id="twm" placeholder="请输入图文码"/>
+							<div class="login_hide"></div>
+							<div class="login_reset"></div>
+							<div class="changTwm csscf580ede21a446"></div>
+						</div>
+						<div class="login1_btn">
+							<input type="submit" value="登录" class="btn"/>
+						</div>
+					</form>
+					<div class="login1_more clearfix">
+						<a href="register.html" class="register">快速注册</a>
+						<a href="found_pwd.html" class="found_pwd">忘记密码</a>
+					</div>
+					
+					<div class="login1_bottom">
+						<p>登录表示您同意<span>ANMONG</span>和<span>隐私条款</span></p>
+					</div>
+					<div class="down">
+						<a href="http://www.miibeian.gov.cn">版权所有 © anmong 蜀ICP备17032039号</a>
+					</div>
+				</div>
+				<div class="login_check login2" style="display: none;">
+					<form action="" method="post" onsubmit="return checkSubmit();">
+						<div class="login2_name">
+							<span>手机号</span>
+							<input type="text" name="phone_num" id="phone_num" placeholder="请输入手机号"/>
+							<div class="login_hide"></div>
+							<div class="login_reset2"></div>
+						</div>
+						<div class="login2_yz clearfix">
+							<div class="login2_pwd">
+								<span>验证码</span>
+								<input type="text" name="phone_yzm" id="phone_yzm" placeholder="请输入验证码"/>
+								<div class="login_hide"></div>
+								<div class="login_reset"></div>
+							</div>
+							<div class="send_yzm clearfix"><p>发送验证码</p></div>
+						</div>
+						<div class="login2_btn">
+							<input type="submit" value="登录" class="btn2"/>
+						</div>
+					</form>
+				</div>
+			</div>
+			
+		</div>
+		<script src="static/js/login.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

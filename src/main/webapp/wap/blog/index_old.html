@@ -1,0 +1,939 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!--解决uc更改默认字体大小-->
+    <meta name="wap-font-scale" content="no"/>
+    <title>安梦-Blog</title>
+    <link rel="stylesheet" type="text/css" href="../static/css/public.css"/>
+    <link rel="stylesheet" href="../static/css/blog.css" />
+    <script src="../static/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="../static/js/common.js"></script>
+    <style type="text/css">
+        /*.vueAdd{display: none;}*/
+        .dropload-up,.dropload-down{
+            position: relative;
+            height: 0;
+            overflow: hidden;
+            font-size: 12px;
+            /* 开启硬件加速 */
+            -webkit-transform:translateZ(0);
+            transform:translateZ(0);
+        }
+        .dropload-down{
+            height: 50px;
+        }
+        .dropload-refresh,.dropload-update,.dropload-load,.dropload-noData{
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+        }
+        .dropload-load .loading{
+            display: inline-block;
+            height: 15px;
+            width: 15px;
+            border-radius: 100%;
+            margin: 6px;
+            border: 2px solid #666;
+            border-bottom-color: transparent;
+            vertical-align: middle;
+            -webkit-animation: rotate 0.75s linear infinite;
+            animation: rotate 0.75s linear infinite;
+        }
+        @-webkit-keyframes rotate {
+            0% {
+                -webkit-transform: rotate(0deg);
+            }
+            50% {
+                -webkit-transform: rotate(180deg);
+            }
+            100% {
+                -webkit-transform: rotate(360deg);
+            }
+        }
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(180deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+    </style>
+</head>
+<body>
+<div class="viewport">
+    <!-- 效果类 -->
+    <div class="mengceng"></div>
+    <div class="blog_mengceng"></div>
+    <div class="group_mc"></div>
+    <div style="height:0.9rem;">&nbsp;</div>
+    <div class="myBlog_add">
+        <div><h4>新建分组</h4><input type="text" name="addGroup" id="addGroup" placeholder="长度为1-12字母"><h6></h6></div>
+        <span class="add_not">取消</span><span class="add_sure">确定</span>
+    </div>
+    <div class="grouping_add">
+        <div><h4>新建分组</h4><input type="text" name="addGroup2" id="addGroup2" placeholder="长度为1-12字母"><h6></h6></div>
+        <span class="grouping_add_not">取消</span><span class="grouping_add_sure">确定</span>
+    </div>
+    <div class="selective_grouping">
+        <h4 class="grouping_head">选择分组</h4>
+        <ul class="grouping_list"></ul>
+        <div class="grouping_foot">
+            <span class="grouping_foot_cancel">取消</span>
+            <span class="grouping_foot_save">保存</span>
+        </div>
+    </div>
+    <!-- 我的关注 微博更多 -->
+    <ul class="blog_part_more1 clearfix">
+        <li>收藏</li><li>帮上头条</li><li>取消关注</li><li>屏蔽</li><li>举报</li>
+    </ul>
+    <!-- 效果类 end -->
+
+    <!-- start head-->
+    <div class="header blog_head clearfix">
+        <i class="canmera"></i>
+        <div class="blog_nav">
+            <span class="my_blog on" rel="1" col="1"><p class="ellipsis">全部关注</p><i class="up_down"></i></span>
+            <span class="hot_blog "><p>热门</p><i class="up_down"></i></span>
+        </div>
+        <i class="second_code"></i>
+        <!-- nav 隐藏  我的博客，动态 -->
+        <div class="myBlog_nav myBlog_my">
+            <div class="part part_top">
+                <div class="top top_nav clearfix"><p>默认分组</p><span class="myBlog_bj" rel="0">编辑</span></div>
+                <ul class="clearfix">
+                    <li class="on"><p>全部关注</p></li>
+                    <li><p>好友圈</p></li>
+                    <li><p>群微博</p></li>
+                    <li><p>特别关注</p></li>
+                </ul>
+            </div>
+            <div class="part part_my">
+                <div class="top_nav"><p>我的分组</p></div>
+                <ul class="my_nav clearfix">
+                    <li><p>搞笑幽默sssss</p></li>
+                    <li><p>视频音乐</p></li>
+                    <li><p>校园生活</p></li>
+                    <li><p>美女</p></li>
+                    <li><p>同事</p></li>
+                    <li><p>名人明星</p></li>
+                    <li><p>同学</p></li>
+                    <li><p>读书分享</p></li>
+                    <li still="0" class="add_before"><p>悄悄关注</p></li>
+                    <li still='1' class="add_blog"><p>＋新建分组</p></li>
+                </ul>
+            </div>
+            <div class="part others">
+                <div class="top_nav"><p>其他</p></div>
+                <ul class="clearfix">
+                    <li><p>周边微博</p></li>
+                </ul>
+            </div>
+        </div>
+        <!-- 热门分类， 固定 -->
+        <div class="myBlog_nav myBlog_fixed">
+            <div class="part part_duo">
+                <div class="top_nav"><p>热门分类</p></div>
+                <ul class="hot_more clearfix">
+                    <li class="on"><p>热门</p></li>
+                    <li><p>两会</p></li>
+                    <li><p>汽车</p></li>
+                    <li><p>搞笑</p></li>
+                    <li><p>搞笑幽默</p><i></i></li>
+                    <li><p>视频音乐</p></li>
+                    <li><p>校园生活</p></li>
+                    <li><p>美女</p></li>
+                    <li><p>同事</p></li>
+                    <li><p>名人明星</p></li>
+                    <li><p>同学</p></li>
+                    <li class="blog_hot_more" still="1"><p>更多▼</p></li>
+                    <li class="blog_hot_hide"><p>历史</p></li>
+                    <li class="blog_hot_hide"><p>美食</p></li>
+                    <li class="blog_hot_hide"><p>美图</p></li>
+                    <li class="blog_hot_hide"><p>电视剧</p></li>
+                    <li class="blog_hot_hide"><p>读书</p></li>
+                    <li class="blog_hot_hide"><p>科普</p></li>
+                    <li class="blog_hot_hide"><p>运动健身</p></li>
+                    <li class="blog_hot_hide"><p>综艺</p></li>
+                    <li class="blog_hot_hide"><p>萌宠</p></li>
+                    <li class="blog_hot_hide blog_hot_short" still="1"><p>收起▲</p></li>
+                </ul>
+            </div>
+            <div class="part part_duo">
+                <div class="top_nav"><p>榜单</p></div>
+                <ul class="clearfix">
+                    <li><p>搞笑幽默</p><i></i></li>
+                    <li><p>视频音乐</p></li>
+                    <li><p>校园生活</p></li>
+                    <li><p>美女</p></li>
+                    <li><p>同事</p></li>
+                    <li><p>名人明星</p></li>
+                    <li><p>同学</p></li>
+                    <li><p>读书分享</p></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!--我的blog-->
+    <div class="blog_content" id="myBlogContent">
+        <div class="my_blog_content" name="全部关注" hadvue="0">
+            <div class="my_blog_content_list">
+                <!-- 只有全部关注有 ge -->
+                <div class="blog_person">
+                    <ul class="clearfix">
+                        <li><div><img src="../static/images/head_img_03.png" alt=""></div><p class="ellipsis">我的故事</p></li>
+                        <li><div><img src="../static/images/head_img_03.png" alt=""></div><p class="ellipsis">我的故事123</p></li>
+                        <li><div><img src="../static/images/head_img_03.png" alt=""></div><p class="ellipsis">我的故事</p></li>
+                    </ul>
+                </div>
+                <!-- 内容  关注和最多 只能有一个-->
+                <div class="blog_part" v-for="(value, key) in blogs">
+                    <div class="blog_part_head clearfix">
+                        <div class="person_head_img"><img :src="value.headUrl" alt=""><i class="blog_icon_v"></i></div>
+                        <div class="person_head_msg">
+                            <h4 class="person_name">{{value.title}}<i class="blog_icon_hg6"></i></h4>
+                            <p><span class="blog_time">{{value.createAt}}</span>来自 <span class="blog_src">微博 weibo.com</span></p>
+                        </div>
+                        <div class="blog_this_more"></div>
+                    </div>
+                    <div class="blog_part_body">
+                        <a href="blog_comment.html">
+                            {{value.txt}}
+                        </a>
+                    </div>
+                    <ul class="blog_part_down clearfix">
+                        <li class="blog_discuss"><i></i><p>评论</p></li>
+                        <li class="blog_repeat"><i></i><p>转发</p></li>
+                        <li class="blog_zan"><i></i><p class="blog_zan_num">{{value.likeQuantity}}</p></li>
+                    </ul>
+
+                </div>
+            </div>
+            <!-- <div class="blog_part">
+                <div class="blog_part_head clearfix">
+                    <div class="person_head_img"><img src="../static/images/head_img_03.png" alt=""><i class="blog_icon_v"></i></div>
+                    <div class="person_head_msg">
+                        <h4 class="person_name">读书语录<i class="blog_icon_hg6"></i></h4>
+                        <p><span class="blog_time">1分钟前</span>来自 <span class="blog_src">微博 weibo.com</span></p>
+                    </div>
+                    <div class="blog_this_more"></div>
+                </div>
+                <div class="blog_part_body">
+                    <a href="blog_comment.html">
+                        <p>感谢少时<em>@小明</em><em>@小红</em>少时诵诗书所所所所所所所所所所所所所所所所所所所所所所</p>
+                        <div class="blog_img">
+                            <img src="../static/images/blog_img_03.jpg" alt="">
+                        </div>
+                    </a>
+                </div>
+                <ul class="blog_part_down clearfix">
+                    <li class="blog_discuss"><i></i><p>评论</p></li>
+                    <li class="blog_repeat"><i></i><p>转发</p></li>
+                    <li class="blog_zan"><i></i><p class="blog_zan_num">6</p></li>
+                </ul>
+
+            </div>-->
+        </div>
+
+    </div>
+    <!--推荐blog-->
+    <div class="blog_content" id="recommendBlogContent" style="display: none;">
+        <!--<div class="recommend_blog_content" name="热门">-->
+        <!--<div class="recommend_blog_content_list">-->
+        <!--<div class="blog_part" v-for="(value, key) in hotBlogs">-->
+        <!--<div class="blog_part_head clearfix">-->
+        <!--<div class="person_head_img"><img :src="value.headUrl" alt=""><i class="blog_icon_v"></i></div>-->
+        <!--<div class="person_head_msg">-->
+        <!--<h4 class="person_name">{{value.title}}<i class="blog_icon_hg6"></i></h4>-->
+        <!--<p><span class="blog_time">{{value.createAt}}</span>来自 <span class="blog_src">微博 weibo.com</span></p>-->
+        <!--</div>-->
+        <!--<div class="blog_this_more"></div>-->
+        <!--</div>-->
+        <!--<div class="blog_part_body">-->
+        <!--<a href="blog_comment.html">-->
+        <!--{{value.txt}}-->
+        <!--</a>-->
+        <!--</div>-->
+        <!--<ul class="blog_part_down clearfix">-->
+        <!--<li class="blog_discuss"><i></i><p>评论</p></li>-->
+        <!--<li class="blog_repeat"><i></i><p>转发</p></li>-->
+        <!--<li class="blog_zan"><i></i><p class="blog_zan_num">{{value.likeQuantity}}</p></li>-->
+        <!--</ul>-->
+
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+    </div>
+    <!--尾部-->
+    <div style="height:1.03rem;">&nbsp;</div>
+    <div class="footer">
+        <ul class="clearfix">
+            <li class="on">
+                <a href="/wap/index.html">
+                    <i class="footer_home"></i>
+                    <p>首页</p>
+                </a>
+            </li>
+            <!-- 	<li>
+                    <a href="javascript:;">
+                        <i class="footer_home"></i>
+                        <p>贴吧</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="/wap/game/game.html">
+                        <i class="footer_home"></i>
+                        <p>游戏</p>
+                    </a>
+                </li> -->
+            <li>
+                <a href="/wap/live/watch.html">
+                    <i class="footer_home"></i>
+                    <p>直播</p>
+                </a>
+            </li>
+            <li>
+                <a href="/wap/blog/index.html">
+                    <i class="footer_home"></i>
+                    <p>动态</p>
+                </a>
+            </li>
+            <!-- 	<li>
+                    <a href="javascript:;">
+                        <i class="footer_home"></i>
+                        <p>好友</p>
+                    </a>
+                </li> -->
+            <li>
+                <a href="/wap/my/index.html">
+                    <i class="footer_home"></i>
+                    <p>我的</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+<script src="../static/js/index.js"></script>
+<script src="../static/js/isLogin.js"></script>
+<!-- <script src="../static/js/blog.js"></script> -->
+<script src="../static/js/vue.min.js"></script>
+<script src="../static/js/dropload.min.js" type="text/javascript" charset="utf-8"></script>
+<script>
+
+    //首次加载 全部关注和热门
+    myBlogShow("全部关注");
+    recommendBlogShow("热门");
+    /*
+    监听 内容改变。
+     */
+    $(".my_blog p").on('DOMNodeInserted', function(e) {
+        console.log(  $(e.target).html());
+    });
+    $(function(){
+        /*
+		1.获取微博,默认获取全部关注
+		*/
+        var  storage = JSON.parse(window.localStorage.getItem('user'));
+
+        $('.blog_part').eq(0).css({'margin-top':'0px'});
+        //全部关注 每条微博更多
+        $(document).on('click','.blog_this_more',function(){
+            $('.blog_part_more1').show();
+            $('.blog_mengceng').show();
+            // 当前微博，
+            var index_ = $('.blog_this_more').index($(this));
+            var thisBlog = $(this).parents('.blog_part');
+            thisBlogMore(thisBlog);
+        })
+
+
+        var kz = '<div class="blog_discuss_more">'+
+            '<div class="clearfix blog_kz"><p>'+"快转"+'</p></div>'+
+            '<div class="clearfix blog_zf"><p>'+"转发"+'</p></div>'+
+            '<div class="clearfix blog_sendfriend"><p>'+"发送给朋友"+'</p></div></div>';
+        $(document).on('click','.blog_discuss',function(){
+            if($(this).find('.blog_discuss_more').length >0) {
+                $(this).find('.blog_discuss_more').show();
+            }else{
+                $(this).append(kz);
+            }
+            $('.blog_mengceng').show();
+        })
+
+
+    })
+
+    /*rel 判断 on的状态。
+    *col 判断 导航是打开还是关闭
+    */
+    $('.blog_nav span').click(function(){
+        var index_ = $('.blog_nav span').index($(this));
+        $(this).addClass('on').siblings().removeClass('on');
+        $('.up_down').css({'background-image':"url(../static/images/icon/icon_down.png)"});
+        if($(this).attr('rel') == 1){
+            $('.mengceng').toggle();
+            $('.myBlog_nav').eq(index_).slideToggle('fast',callback(index_));
+
+        }else{
+            $('.mengceng').hide();
+            $('.myBlog_nav').hide();
+            $(this).attr('rel',1).attr('col',1).siblings().attr('rel',0);
+            $('.blog_content').hide().eq(index_).show();
+        }
+        edit_sure();//如果正在编辑则完成编辑 状态
+    })
+    myBlod(); //导航一系列操作
+    function myBlod(){
+        /*编辑 ,除了我的 关闭角标，其他内容都不能编辑，点击。
+        */
+        $('.myBlog_bj').click(function(){
+
+            if($(this).attr('rel') !=1){ //编辑
+                $(this).html("完成").attr('rel',1);
+                var close='<i class="myBlog_close"></i>';
+                $('.my_nav li').each(function(){
+                    if(!$(this).attr('still')){
+                        $(this).attr('check',1).append(close);
+
+                    }
+                })
+                $('.part li').each(function(){ //设置 只有关闭按钮能点击。
+                    if($(this).attr('check') !=1){
+                        $(this).css({"background":'#fafafa'}).find('p').css({'pointer-events':'none'});
+                    }else{
+                        $(this).find('p').css({'pointer-events':'none'});
+                    }
+                })
+            }else{
+                //完成
+                edit_sure();
+            }
+
+
+
+        })
+
+        /* on 事件监听。 动态添加的 myBlog_close 也会添加上click 事件。
+        * 和删除分组
+         */
+        $(document).on("click",".myBlog_close",function(){
+            var delBody = '<div class="myBlog_del">'+'<h4>'+"确定删除该分组吗？"+'</h4>'+
+                '<span class="del_not">'+'取消'+'</span><span class="del_sure">'+'确定'+'</span>';
+            $('.blog_mengceng').show().prev().hide();
+            $('body').append(delBody);
+            // 获取角标 传到删除 函数
+            var index_= $('.my_nav li').index($(this).parent());
+            delSure(index_);
+        })
+        $(document).on("click",".del_not",function(){
+            $('.blog_mengceng').hide().prev().show();
+            $('body').find('.myBlog_del').remove();
+        })
+        /*
+            确认删除 , ajax
+         */
+        function delSure(a){
+            $('.del_sure').click(function(){
+                $('.my_nav li').eq(a).remove();
+                $('.blog_mengceng').hide().prev().show();
+                $('.mengceng').show();
+                $('body').find('.myBlog_del').remove();
+
+                //如果正在用的分组被删除了，则默认变动到全部关注
+                var isOn = false;
+                $('.myBlog_my li p').each(function(){
+                    if($('.my_blog p').eq(0).html() == $(this).html()){
+                        isOn = true;
+                    }
+                })
+                if(!isOn){
+                    $('.my_blog p').eq(0).html($('.myBlog_my li p').eq(0).html());
+                    $('.myBlog_my li').eq(0).addClass('on');
+                }
+            })
+        }
+        /*
+        添加分组
+         */
+        $('.add_blog p').click(function(){
+            $('.blog_mengceng').show().prev().hide();
+            $('.myBlog_add').show();
+            $('#addGroup').focus().val('').next().html('');
+        })
+        /*
+            确认添加 ajax
+         */
+        $('.add_sure').click(function(){
+            if($('#addGroup').val()){
+                if($('#addGroup').val().length > 12){
+                    $('#addGroup').focus().val('').next().html('分组名称过长');
+                }else{
+                    var add = '<li><p>'+$('#addGroup').val()+'</p></li>';
+                    $('.my_nav .add_before').before(add);
+                    // $('.my_nav').prepend(add);
+                    $('.blog_mengceng').hide().prev().show();
+                    $('.myBlog_add').hide();
+                }
+            }else{
+                $('#addGroup').focus().next().html('分组名称不能为空');
+            }
+
+        })
+        $(document).on("click",".add_not",function(){
+            $('.blog_mengceng').hide().prev().show();
+            $('.myBlog_add').hide();
+        })
+        $('.blog_mengceng').click(function(){
+            $('body').find('.myBlog_del').remove();
+            $('.myBlog_add').hide();
+            //more
+            $('.blog_part_more1').hide();
+            $('.blog_discuss_more').hide();
+            // $('.blog_mengceng').hide().prev().show();
+            $(this).hide();
+        })
+        /*
+        取消蒙层
+         */
+        $('.mengceng').click(function(){//点击蒙层，关闭 导航
+            $(this).hide();
+            $('.blog_nav span').each(function(){
+
+                if($(this).attr('rel') == 1){
+                    var index_ = $('.blog_nav span').index($(this));
+                    $('.myBlog_nav').eq(index_).slideToggle('fast',callback(index_));
+                }
+            })
+        })
+
+        /*
+        获取 内容，ajax
+         */
+        $(document).on('click','.part li p',function(){
+            var self = $(this);
+            $('.blog_nav span').each(function(){
+                var index_ = $('.blog_nav span').index($(this));
+                if($(this).attr('rel') == 1){
+                    if(self.parent().attr('still') !=1 ){ //除了新建分组。
+                        self.parent().addClass('on').siblings().removeClass('on').parents('.part').siblings().find('li').removeClass('on');
+                        $(this).find('p').html(self.html());
+                        $('.mengceng').toggle();
+                        $('.myBlog_nav').eq(index_).slideToggle('fast',callback(index_));
+                        // $.ajax({})
+                        if($(this).hasClass('hot_blog')){
+                            recommendBlogShow(self.html())
+                        }else{
+                            myBlogShow(self.html());
+                        }
+                    }
+
+                }
+            })
+        })
+
+        /*
+         推荐-更多
+         */
+        $(document).on('click','.blog_hot_more',function(){
+            $('.blog_hot_more').remove();
+            $('.blog_hot_hide').show();
+        })
+        /*
+        推荐—更多隐藏
+         */
+        $('.blog_hot_short').click(function(){
+            var mo = '<li class="blog_hot_more" still="1"><p>更多▼</p></li>';
+            $('.blog_hot_hide').eq(0).before(mo);
+            $('.blog_hot_hide').hide();
+        })
+    }
+    /*
+    完成编辑
+     */
+    function edit_sure(){
+        if($('.myBlog_bj').attr('rel') ==1){
+            $('.myBlog_bj').html("编辑").attr('rel',0);
+            $('.part li').each(function(){
+                if($(this).attr('check') !=1){
+                    $(this).css({"background":'#f2f2f2'}).find('p').css({'pointer-events':'auto'});
+                }else{
+                    $(this).find('p').css({'pointer-events':'auto'});
+                }
+            })
+            $('.my_nav li').each(function(){
+                $(this).find('.myBlog_close').remove();
+            })
+        }
+    }
+    /*
+    改变头部颜色 border .角标状态
+     回调函数
+     */
+    function callback(a){
+        if($('.blog_nav span').eq(a).attr('col') == 1){
+            $('.blog_head').css({"background-color":"#fafafa","border-bottom":'1px solid #f7f7f7'});
+            $('.up_down').css({'background-image':"url(../static/images/icon/icon_top.png)"});
+            $('.blog_nav span').eq(a).attr('col',0);
+        }else{
+            $('.blog_head').css({"background-color":"#fff","border-bottom":'1px solid transparent'});
+            $('.up_down').css({'background-image':"url(../static/images/icon/icon_down.png)"});
+            $('.blog_nav span').eq(a).attr('col',1);
+        }
+
+    }
+    /*
+    每条微博，更多
+     */
+    function thisBlogMore(cont){
+        //只有在 每条博客更多 点击后才能触发。
+    }
+    /*
+     点赞
+     */
+    $(document).on('click','.blog_zan',function(){
+        var self = $(this);
+        $(this).css({"pointer-events":"none"}); //1s 内不能点击
+        if($(this).attr('hadZan') !=1){
+            $(this).attr('hadZan',1).children('p').html(Number($(this).children('p').html())+1).siblings('i').css({'background-image':'url(../static/images/icon/icon_red_zan.png)'});
+        }else{
+            $(this).attr('hadZan',0).children('p').html(Number($(this).children('p').html())-1).siblings('i').css({'background-image':'url(../static/images/icon/icon_zan.png)'});
+        }
+        $(this).children('i').addClass('big_zan');
+        setTimeout(function(){
+            self.css({'pointer-events':'auto'}).children('i').removeClass('big_zan');
+        },1000)
+    })
+
+    /*
+    关注-分组设置
+     */
+    function setGroup(){
+        //先清空
+        $('.grouping_list').children().remove();
+        $('.my_nav li').each(function(){
+            var name = $(this).children('p').html();
+            var self = '<li class="clearfix"><p>'+name+'</p>'+'<input type= "checkbox">'+'</li>';
+            if($(this).attr('still')!=0){
+                if($(this).attr('still')!=1){
+                    $('.grouping_list').append(self);
+                }else{
+                    var self2 =	'<li class="clearfix add_grouping" still="1"><p>'+name+'</p></li>';
+                    $('.grouping_list').append(self2);
+                }
+            }
+        })
+    }
+    $(document).on('click','.blog_this_gz',function(){
+        //设置 关注-设置分组（我的分组）。
+        setGroup();
+        var had_follow = '<span>'+"√"+'</span>'+"已关注";
+        if($(this).attr('had_follow')!=1){
+            $(this).html(had_follow).css({'color':'#333',"border-color":'#ccc'}).attr('had_follow',1);
+            // 设置分组
+            $('.blog_mengceng').show();
+            $('.selective_grouping').show();
+            //关闭按钮
+            $('.blog_mengceng').click(function(){
+                $(this).hide();
+                $('.selective_grouping').hide();
+            })
+            $('.grouping_foot_cancel').click(function(){
+                $('.blog_mengceng').hide();
+                $('.selective_grouping').hide();
+            })
+            // 新建分组 new
+            $('.add_grouping').click(function(){
+                $('.group_mc').show();
+                $('.grouping_add').show();
+                $('#addGroup2').focus().val('').next().html('');
+
+                $('.group_mc').click(function(){
+                    $(this).hide();
+                    $('.grouping_add').hide();
+                })
+                $('.grouping_add_not').click(function(){
+                    $('.group_mc').hide();
+                    $('.grouping_add').hide();
+                })
+            })
+
+            /*
+              确认添加 ajax
+             */
+            $('.grouping_add_sure').click(function(){
+                if($('#addGroup2').val()){
+                    if($('#addGroup2').val().length > 12){
+                        $('#addGroup2').focus().val('').next().html('分组名称过长');
+                    }else{
+                        var add = '<li><p>'+$('#addGroup2').val()+'</p></li>';
+                        var add2 = '<li class="clearfix" had_choose="1"><p>'+$('#addGroup2').val()+'</p>'+'<input type= "checkbox" checked="true" class="choosed">'+'</li>';
+                        $('.my_nav .add_before').before(add);
+                        $('.grouping_list').prepend(add2);
+                        $('.group_mc').hide();
+                        $('.grouping_add').hide();
+                        // ajax
+                    }
+                }else{
+                    $('#addGroup2').focus().next().html('分组名称不能为空');
+                }
+
+            })
+            // 保存设置，提交我的选择分组 ajax
+            $('.grouping_foot_save').click(function(){
+                $('.blog_mengceng').hide();
+                $('.selective_grouping').hide();
+                //$.ajax({})
+            })
+        }
+
+    })
+
+    /*
+     分组 多选
+     */
+    $(document).on('click','.grouping_list li',function(){
+        if($(this).attr('had_choose')!=1){ //未选中状态
+            $(this).attr('had_choose',1).children('input').addClass('choosed').prop('checked',true);
+        }else{
+            $(this).attr('had_choose',0).children('input').removeClass('choosed').prop('checked',false);
+        }
+
+    })
+
+    //全部关注
+    function  myBlogShow(care){
+        var my_blog_content1 ='<div class="my_blog_content" name="全部关注">'+
+            '<div class="my_blog_content_list">'+
+            '<div class="blog_person">'+
+            '<ul class="clearfix">'+
+            '<li><div><img src="../static/images/head_img_03.png" alt=""></div><p class="ellipsis">我的故事</p></li>'+
+            '<li><div><img src="../static/images/head_img_03.png" alt=""></div><p class="ellipsis">我的故事123</p></li>'+
+            '<li><div><img src="../static/images/head_img_03.png" alt=""></div><p class="ellipsis">我的故事</p></li>'+
+            '</ul></div>'+
+            '<div class="blog_part" v-for="(value, key) in blogs">'+
+            '<div class="blog_part_head clearfix">'+
+            '<div class="person_head_img"><img :src="value.headUrl" alt=""><i class="blog_icon_v"></i></div>'+
+            '<div class="person_head_msg">'+
+            '<h4 class="person_name">'+'{{value.createMan}}'+'<i class="blog_icon_hg6"></i></h4>'+
+            '<p><span class="blog_time">'+'{{value.createAt}}'+'</span>来自 <span class="blog_src">微博 weibo.com</span></p>'+
+            '</div>'+
+            '<div class="blog_this_more"></div>'+
+            '</div>'+
+            '<div class="blog_part_body">'+
+            '<a :href="\'blog_comment.html?id=\' + value.id">'+'{{value.txt}}'+'</a>'+
+            '</div>'+
+            '<ul class="blog_part_down clearfix">'+
+            '<li class="blog_repeat"><i></i><p>转发</p></li>'+
+            '<li class="blog_discuss"><i></i><p>评论</p></li>'+
+            '<li class="blog_zan"><i></i><p class="blog_zan_num">'+'{{value.likeQuantity}}'+'</p></li>'+
+            '</ul>'+
+            '</div></div></div>';
+        var my_blog_content2 ='<div class="my_blog_content" name='+care+'>'+
+            '<div class="my_blog_content_list">'+
+            '<div class="blog_part" v-for="(value, key) in blogs">'+
+            '<div class="blog_part_head clearfix">'+
+            '<div class="person_head_img"><img :src="value.headUrl" alt=""><i class="blog_icon_v"></i></div>'+
+            '<div class="person_head_msg">'+
+            '<h4 class="person_name">'+'{{value.createMan}}'+'<i class="blog_icon_hg6"></i></h4>'+
+            '<p><span class="blog_time">'+'{{value.createAt}}'+'</span>来自 <span class="blog_src">微博 weibo.com</span></p>'+
+            '</div>'+
+            '<div class="blog_this_more"></div>'+
+            '</div>'+
+            '<div class="blog_part_body">'+
+            '<a :href="\'blog_comment.html?id=\' + value.id">'+'{{value.txt}}'+'</a>'+
+            '</div>'+
+            '<ul class="blog_part_down clearfix">'+
+            '<li class="blog_repeat"><i></i><p>评论</p></li>'+
+            '<li class="blog_discuss"><i></i><p>转发</p></li>'+
+            '<li class="blog_zan"><i></i><p class="blog_zan_num">'+'{{value.likeQuantity}}'+'</p></li>'+
+            '</ul>'+
+            '</div></div></div>';
+        if(care == "全部关注"){
+            $('#myBlogContent').html('').append(my_blog_content1);
+        }else{
+            $('#myBlogContent').html('').append(my_blog_content2);
+        }
+
+        var vue = new Vue({
+            el:'.my_blog_content_list',
+            data:{
+                blogs:[],
+            },
+            methods:{
+                moreBlogs:function(upordown){
+                    var _self = this;
+                    $.ajax({
+                        url:'/wap/article/find-all',
+                        type:'get',
+                        data:{
+                            pageSize:10,
+                            type:1,
+                        },
+                        async:false,
+                        success:function (data) {
+                            if(data.success){
+                                getData = data.collection;
+                                console.log(getData);
+                                for(var i=0;i<getData.length;i++){
+                                    // var blogArray = {contentid:getData[i].id,headUrl :getData[i].headUrl ,title:getData[i].title,txt:getData[i].txt,createAt:getData[i].createAt,likeQuantity:getData[i].likeQuantity,createMan:getData[i].createMan};
+                                    if(upordown){//1表示下拉，数据添加在上面
+                                        _self.blogs.push(getData[i]);
+                                    }else{//0 手指上滑，数据添加在下面
+                                        _self.blogs.unshift(getData[i]);
+                                    }
+                                }
+
+                            }else{
+                                showBackMsg2(data.message);
+                            }
+                        }
+                    })
+                },
+                isscroll:function() {
+                    $('.my_blog_content').each(function(){
+
+                    })
+                    $('.my_blog_content').dropload({
+                        //scrollArea很关键，要不然加载更多不起作用
+                        scrollArea: window,
+                        domUp: {
+                            domClass: 'dropload-up',
+                            domRefresh: '<div class="dropload-refresh">↓下拉刷新</div>',
+                            domUpdate: '<div class="dropload-update">↑释放更新</div>',
+                            domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+                        },
+                        domDown: {
+                            domClass: 'dropload-down',
+                            domRefresh: '<div class="dropload-refresh">↑上拉加载更多</div>',
+                            domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+                            domNoData: '<div class="dropload-noData">暂无数据</div>'
+                        },
+                        loadUpFn: function (me) {
+                            //下拉刷新需要调用的函数
+                            vue.moreBlogs(0);
+                            //重置下拉刷新
+                            me.resetload();
+                        },
+                        loadDownFn: function (me) {
+                            //上拉加载更多需要调用的函数
+                            vue.moreBlogs(1);
+                            //定时器函数,为了看出上拉加载更多效果
+                            setTimeout(function () {
+                                // 每次数据加载完，必须重置
+                                me.resetload();
+                            }, 1000);
+                        }
+                    });
+                },
+            }
+        })
+        setTimeout(function(){vue.isscroll();},200)
+    }
+    //推荐
+    function recommendBlogShow(care){
+        var recommond_blog_content ='<div class="recommend_blog_content" name='+care+'>'+
+            '<div class="recommend_blog_content_list">'+
+            '<div class="blog_part" v-for="(value, key) in hotBlogs">'+
+            '<div class="blog_part_head clearfix">'+
+            '<div class="person_head_img"><img :src="value.headUrl" alt=""><i class="blog_icon_v"></i></div>'+
+            '<div class="person_head_msg">'+
+            '<h4 class="person_name">'+'{{value.createMan}}'+'<i class="blog_icon_hg6"></i></h4>'+
+            '<p><span class="blog_time">'+'{{value.createAt}}'+'</span>来自 <span class="blog_src">微博 weibo.com</span></p>'+
+            '</div>'+
+            '<div class="blog_this_more"></div>'+
+            '</div>'+
+            '<div class="blog_part_body">'+
+            '<a :href="\'blog_comment.html?id=\' + value.id">'+'{{value.txt}}'+'</a>'+
+            '</div>'+
+            '<ul class="blog_part_down clearfix">'+
+            '<li class="blog_repeat"><i></i><p>评论</p></li>'+
+            '<li class="blog_discuss"><i></i><p>转发</p></li>'+
+            '<li class="blog_zan"><i></i><p class="blog_zan_num">'+'{{value.likeQuantity}}'+'</p></li>'+
+            '</ul>'+
+            '</div></div></div>';
+        $('#recommendBlogContent').html('').append(recommond_blog_content);
+        var hotVue = new Vue({
+            el:'.recommend_blog_content_list',
+            data:{
+                hotBlogs:[],
+            },
+            methods:{
+                moreBlogs:function(upordown){
+                    var _self = this;
+                    $.ajax({
+                        url:'/wap/article/find-all',
+                        type:'get',
+                        data:{
+                            pageSize:10,
+                            type:1,
+                        },
+                        async:false,
+                        success:function (data) {
+                            if(data.success){
+                                getData = data.collection;
+                                console.log(getData);
+                                for(var i=0;i<getData.length;i++){
+                                    // var hotblogArray = {contentid:getData[i].id,headUrl :getData[i].headUrl ,title:getData[i].title,txt:getData[i].txt,createAt:getData[i].createAt,likeQuantity:getData[i].likeQuantity,createMan:getData[i].createMan};
+                                    if(upordown){//1表示下拉，数据添加在上面
+                                        _self.hotBlogs.push(getData[i]);
+                                    }else{//0 手指上滑，数据添加在下面
+                                        _self.hotBlogs.unshift(getData[i]);
+                                    }
+                                }
+
+                            }else{
+                                showBackMsg2(data.message);
+                            }
+                        }
+                    })
+                },
+                isscroll:function() {
+                    $('.recommend_blog_content').each(function(){
+
+                    })
+                    $('.recommend_blog_content').dropload({
+                        //scrollArea很关键，要不然加载更多不起作用
+                        scrollArea: window,
+                        domUp: {
+                            domClass: 'dropload-up',
+                            domRefresh: '<div class="dropload-refresh">↓下拉刷新</div>',
+                            domUpdate: '<div class="dropload-update">↑释放更新</div>',
+                            domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>'
+                        },
+                        domDown: {
+                            domClass: 'dropload-down',
+                            domRefresh: '<div class="dropload-refresh">↑上拉加载更多</div>',
+                            domLoad: '<div class="dropload-load"><span class="loading"></span>加载中...</div>',
+                            domNoData: '<div class="dropload-noData">暂无数据</div>'
+                        },
+                        loadUpFn: function (me) {
+                            //下拉刷新需要调用的函数
+                            hotVue.moreBlogs(0);
+                            //重置下拉刷新
+                            me.resetload();
+                        },
+                        loadDownFn: function (me) {
+                            //上拉加载更多需要调用的函数
+                            hotVue.moreBlogs(1);
+                            //定时器函数,为了看出上拉加载更多效果
+                            setTimeout(function () {
+                                // 每次数据加载完，必须重置
+                                me.resetload();
+                            }, 1000);
+                        }
+                    });
+                },
+            }
+        })
+        setTimeout(function(){hotVue.isscroll();},200)
+    }
+</script>
+</html>

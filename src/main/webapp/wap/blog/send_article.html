@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!--解决uc更改默认字体大小-->
+    <meta name="wap-font-scale" content="no"/>
+    <title>安梦-发表文章</title>
+    <link rel="stylesheet" type="text/css" href="/wap/jqueryChat/font_Icon/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="/wap/jqueryChat/css/chat.css">
+    <link rel="stylesheet" type="text/css" href="../static/css/public.css"/>
+    <link rel="stylesheet" href="../static/css/blog.css" />
+    <script src="../static/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+    <script type="text/javascript" src="../static/js/common.js"></script>
+    <style>
+        .foot .biaoqing-photo{right:0.6rem;top:-165px;}
+        .chat-message{margin-bottom:10px;position:relative;}
+        .chat-message .icon-guanbi{    background: rgba(0,0,0,0.3);position: absolute;left: 5px;top: 5px;color: #fff;border-radius: 6px;padding: 1px;}
+
+    </style>
+</head>
+<body>
+
+<div class="viewport">
+    <div class="send_main">
+        <header class="send_header clearfix">
+            <div ><i class="icon_close"></i></div>
+            <div class="send_header_img"><img src="../static/images/head_img_03.png" alt=""></div>
+            <div class="send_sure"><a class="">发送</a></div>
+        </header>
+        <main class="send_content">
+           <div class="send_txt">
+                   <textarea placeholder="分享新鲜事…" id="sendTxt"></textarea>
+           </div>
+        </main>
+        <footer class="foot">
+            <div class="send_footer clearfix">
+               <div class="send_footer_nav">
+                   <label for="inputImg">
+                       <input type="file" onchange="selectImg(this)" accept="image/jpg,image/jpeg,image/png" name="file" id="inputImg" class="hide">
+                       <i class="icon_pic iconfont icon-tuxiang1"></i>
+                   </label>
+                   <label for="inputVideo">
+                       <input type="file" onchage="selectVideo(this)" accept="video/mp4" name="file" id="inputVideo" class="hide">
+                       <i class="icon_viedo iconfont icon-gengduo"></i>
+                   </label>
+                   <button id="chat-biaoqing" >
+                       <i class="iconfont icon-biaoqing"></i>
+                   </button>
+               </div>
+
+                <div class="biaoqing-photo">
+                    <ul>
+                        <li><span class="emoji-picker-image" style="background-position: -9px -18px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -40px -18px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -71px -18px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -102px -18px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -133px -18px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -164px -18px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -9px -52px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -40px -52px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -71px -52px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -102px -52px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -133px -52px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -164px -52px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -9px -86px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -40px -86px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -71px -86px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -102px -86px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -133px -86px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -164px -86px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -9px -120px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -40px -120px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -71px -120px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -102px -120px;"></span>
+                        </li>
+                        <li><span class="emoji-picker-image" style="background-position: -133px -120px;"></span>
+                        </li>
+                        <li><span class="emoji-picker-image" style="background-position: -164px -120px;"></span>
+                        </li>
+                        <li><span class="emoji-picker-image" style="background-position: -9px -154px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -40px -154px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -71px -154px;"></span></li>
+                        <li><span class="emoji-picker-image" style="background-position: -102px -154px;"></span>
+                        </li>
+                        <li><span class="emoji-picker-image" style="background-position: -133px -154px;"></span>
+                        </li>
+                        <li><span class="emoji-picker-image" style="background-position: -164px -154px;"></span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>
+
+<script>
+
+    $('.send_content').height($(window).height()-$('.send_header').height()-$('.send_footer').height()-40);
+    $(window).resize(function () {
+        $('.send_content').height($(window).height()-$('.send_header').height()-$('.send_footer').height());
+        console.log($('.send_footer').height(),$('.send_header').height());
+    })
+    $(function () {
+        var  storage = JSON.parse(window.localStorage.getItem('user'));
+
+
+        //textarea 高度自适应
+        $("#sendTxt").height($("#sendTxt").scrollHeight);
+        $("#sendTxt").on("keyup keydown", function(){
+            $(this).height(this.scrollHeight);
+        })
+    })
+
+    //      发送表情
+    $("#chat-biaoqing").click(function () {
+        $(".biaoqing-photo").toggle();
+    });
+    $(document).click(function () {
+        $(".biaoqing-photo").css("display", "none");
+    });
+    $("#chat-biaoqing").click(function (event) {
+        event.stopPropagation();//阻止事件
+    });
+
+    $(".emoji-picker-image").each(function () {
+        $(this).click(function () {
+            var bq = $(this).parent().html();
+            console.log(bq);
+                $(".send_content").append(" <div class=\"chat-message\">" + bq + " </div>");
+
+            //发送后关闭表情框
+            $(".biaoqing-photo").toggle();
+        })
+    });
+    //      发送图片
+    function selectImg(pic) {
+        console.log(1);
+        if (!pic.files || !pic.files[0]) {
+            return;
+        }
+        var reader = new FileReader();
+        reader.onload = function (evt) {
+            var images = evt.target.result;
+            $(".send_content").append("<div class=\"chat-message\"><span class=\"iconfont   icon-guanbi\"></span><img src=" + images + "></div> ");
+        };
+        //关闭图片
+        $(document).on('click','.icon-guanbi',function () {
+            $(this).parent().remove();
+        })
+        reader.readAsDataURL(pic.files[0]);
+
+    }
+
+    /*
+    监听 内容改变。让发表改变
+     */
+    $(".send_content").on('DOMNodeInserted', function(e) {
+        $('.send_sure a').addClass('active');
+        console.log(1);
+    });
+    $('#sendTxt').keyup(function () {
+        if($(this).innerHTML != ''){
+            console.log(2);
+            $('.send_sure a').addClass('active');
+        }else{
+            console.log(4);
+            $('.send_sure a').removeClass('active');
+        }
+    })
+</script>
+</body>
+</html>

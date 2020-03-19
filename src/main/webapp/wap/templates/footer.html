@@ -1,0 +1,56 @@
+	<div class="footer">
+			<ul class="clearfix">
+						<li class="on">
+					<a href="/wap/index.html">
+						<i class="footer_home"></i>
+						<p>首页</p>
+					</a>
+				</li>
+			<!-- 	<li>
+					<a href="javascript:;">
+						<i class="footer_home"></i>
+						<p>贴吧</p>
+					</a>
+				</li>
+				<li>
+					<a href="/wap/game/game.html">
+						<i class="footer_home"></i>
+						<p>游戏</p>
+					</a>
+				</li> -->
+				<li>
+					<a href="/wap/live/watch.html">
+						<i class="footer_home"></i>
+						<p>直播</p>
+					</a>
+				</li>
+				<li>
+					<a href="/wap/blog/index.html">
+						<i class="footer_home"></i>
+						<p>动态</p>
+					</a>
+				</li>
+			<!-- 	<li>
+					<a href="javascript:;">
+						<i class="footer_home"></i>
+						<p>好友</p>
+					</a>
+				</li> -->
+				<li>
+					<a href="/wap/my/index.html">
+						<i class="footer_home"></i>
+						<p>我的</p>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<!--foorer end-->
+		<script type="text/javascript">
+			$(function(){
+				$('.footer li a').click(function(){
+					$(this).parent().addClass('on').siblings().removeClass('on');
+					$(this).children('p').css({'color':'#12b7f5'}).parent().parent().siblings().children().children('p').css({'color':'#b2b2b2'});			
+				})
+			})
+		</script>
+		

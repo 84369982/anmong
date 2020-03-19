@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<!--解决uc更改默认字体大小-->
+	<meta name="wap-font-scale" content="no"/>
+	<title>我的</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/public.css"/>
+	<link rel="stylesheet" href="../static/css/my.css" />
+	<script src="../static/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+</head>
+<body>
+	<div class="viewport" id="viewport" style="background:#f2f1ee">
+		<div style="height:0.97rem;">&nbsp;</div>
+		<div class="header header_my_top clearfix">
+			<p>我的</p>
+			<i class="icon_myset"></i>
+		</div>
+
+		<div class="myMessages clearfix">
+			<div class="myMessages_left fl">
+				<img src="../static/images/head_img_03.png" alt="">
+			</div>
+			<div class="myMessages_right my_notlogin fl" style="display:none;">
+				<div class="myMessages_right_person">
+					<a href="javascript:;" onclick="isLogin();" id="isLogin">
+						<h4>name</h4>
+						<p>个人主页></p>
+					</a>
+				</div>
+				<div class="myMessages_right_down">
+					关注 <span class="my_follow">0</span>被关注 <span class="my_follow_you">0</span>
+				</div>
+			</div>
+			<!-- 未登录 -->
+			<div class="myMessages_right my_login fl">
+				<div class="not_login">
+					<span>
+						<a href="javascript:;">登录/注册</a>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="my_part">
+			<div class="part_li clearfix">
+				<a href="#">
+					<span class="fl icon_my_gz"></span>
+					<div class="fl clearfix">
+						<p class="fl">我的关注</p>
+						<i class="fr"></i>
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<div class="my_part">
+			<div class="part_li clearfix">
+				<a href="#">
+					<span class="fl icon_my_found"></span>
+					<div class="fl clearfix">
+						<p class="fl">发现</p>
+						<i class="fr"></i>
+					</div>
+				</a>
+			</div>
+			<div class="part_li clearfix">
+				<a href="#">
+					<span class="fl"></span>
+					<div class="fl clearfix">
+						<p class="fl">卡包</p>
+						<i class="fr"></i>
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<div class="my_part">
+			<div class="part_li clearfix">
+				<a href="#">
+					<span class="fl icon_my_found"></span>
+					<div class="fl clearfix">
+						<p class="fl">发现</p>
+						<i class="fr"></i>
+					</div>
+				</a>
+			</div>
+			<div class="part_li clearfix">
+				<a href="#">
+					<span class="fl"></span>
+					<div class="fl clearfix">
+						<p class="fl">夜间模式</p>
+						<p class="fr switch2"></p>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+	<script>
+	// 伪登录效果
+	$('.not_login span a').click(function(){
+		console.log(1);
+		$(this).parents('.myMessages_right').hide().siblings('.myMessages_right').show();
+	})
+	$('.switch2').click(function(){
+		if($(this).attr('rel')!=1){
+			$(this).attr('rel',1).addClass('switch2_add');
+		}else{
+			$(this).attr('rel',0).removeClass('switch2_add');
+		}
+	})
+
+	// 本地localStorage 判断是否有登录。
+	function jumpTo(p, url) { 
+	   var hadUser=window.localStorage.getItem('user'); 
+	   console.log(hadUser);
+	   if (hadUser == undefined || hadUser == "") { 
+	     p.attr("href", "/wap/login.html"); 
+		} else { 
+	      p.attr("href", url); 
+	    } 
+	} 
+	 function isLogin() { 
+	   var isLogin = $("#isLogin"); 
+	   jumpTo(isLogin, "/wap/my/myHomepage.html"); 
+	} 
+	</script>
+</body>
+</html>

@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<!--解决uc更改默认字体大小-->
+	<meta name="wap-font-scale" content="no"/>
+	<title>个人主页</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/public.css"/>
+	<link rel="stylesheet" href="../static/css/my.css" />
+	<script src="../static/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+	<script type="text/javascript" src="../static/js/index.js"></script>
+	<style type="text/css">
+
+			.displaynone{display: none;}
+			
+			/*截图上传页面*/
+			.clipbg{
+				position: fixed;
+				background: black;
+				top: 0;
+				z-index: 999;
+				width: 100%;
+				height: 100%;
+				left: 0;
+			}
+			.loading{
+				position: absolute;
+				top: 40%;
+				width: 38%;
+				left: 31%;
+				height: 1.6rem;
+				line-height: 1.6rem;
+				z-index: 99999;
+				text-align: center;
+				color: #ffffff;
+				border-radius:0.2rem ;
+				background: #9f9f9f;
+			}
+			.clipbg #clipArea{
+				width: 100%;
+				height: 80%;
+				margin: auto;
+
+			}
+			.clipbg .footer_cj{
+				width: 90%;
+				position: fixed;
+				left: 5%;
+				bottom: 0px;
+				text-align: center;
+			}
+			.clipbg dl{
+				background: #ffffff;
+				border-radius: 0.08rem;
+				overflow: hidden;
+				margin-bottom: 0.1rem;
+			}
+			.clipbg dd{
+				position: relative;
+				height: 0.6rem;
+				line-height: 0.6rem;
+				border-bottom:1px solid #999999 ;
+			}
+			.clipbg .back{
+				height: 0.6rem;
+				line-height:0.6rem;
+				border-radius: 0.08rem;
+				margin-bottom: 0.1rem;
+				background: #ffffff;
+			}
+			.clipbg dd input{
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				top: 0;
+				left: 0;
+				z-index: 11;
+				filter:alpha(opacity=0);  
+			  -moz-opacity:0;  
+			  -khtml-opacity: 0;  
+			  opacity: 0; 
+			}
+			@media  screen and (min-width: 320px) and (max-width: 414px) {
+				.clipbg dd{height: 0.88rem;line-height: 0.88rem;}
+				.clipbg .back{height: 0.88rem;line-height: 0.88rem;}
+			}
+			@media  screen and (min-width: 414px) and (max-width: 640px) {
+				.clipbg dd{height: 0.7rem;line-height: 0.7rem;}
+				.clipbg .back{height: 0.7rem;line-height: 0.7rem;}
+			}
+		</style>
+</head>
+<body >
+	<div class="mengceng"></div>
+	<div class="viewport" id="myMsg" style="background:#f2f1ee;">
+		<div style="height:0.98rem;">&nbsp;</div>
+		<div class="header clearfix header_homepage">
+			<i class="icon_close">‹</i>
+			<p>个人主页</p>
+		</div>
+		<div class="my_bg">
+			<div class="my_bg_header btn" id="headimg"  rel="head">
+				<img src="" alt="">
+				<i class="my_head_set"></i>
+			</div>
+			<!-- <i class="my_bg_set" rel="bg">背景</i> -->
+			<!--图片裁剪-->
+			<div class="clipbg displaynone">
+				<div id="clipArea" style="user-select: none; overflow: hidden; position: relative;">
+					<div class="photo-clip-layer" style="position: absolute; left: 50%; top: 50%; width: 300px; height: 300px; margin-left: -150px; margin-top: -150px;">
+						<div class="photo-clip-move-layer" style="transform-origin: 0px 0px 0px; transition-timing-function: cubic-bezier(0.1, 0.57, 0.1, 1); transition-duration: 0ms; transform: translate(0px, 0px) scale(1) translateZ(0px); width: 0px; height: 0px;">
+						<div class="photo-clip-rotation-layer"></div>
+						</div>
+					</div>
+					<div class="photo-clip-mask" style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; pointer-events: none;">
+						<div class="photo-clip-mask-left" style="position: absolute; left: 0px; right: 50%; top: 50%; bottom: 50%; width: auto; background-color: rgba(0, 0, 0, 0.498039); margin-right: 150px; margin-top: -150px; margin-bottom: -150px;"></div>
+						<div class="photo-clip-mask-right" style="position: absolute; left: 50%; right: 0px; top: 50%; bottom: 50%; background-color: rgba(0, 0, 0, 0.498039); margin-left: 150px; margin-top: -150px; margin-bottom: -150px;"></div>
+						<div class="photo-clip-mask-top" style="position: absolute; left: 0px; right: 0px; top: 0px; bottom: 50%; background-color: rgba(0, 0, 0, 0.498039); margin-bottom: 150px;"></div>
+						<div class="photo-clip-mask-bottom" style="position: absolute; left: 0px; right: 0px; top: 50%; bottom: 0px; background-color: rgba(0, 0, 0, 0.498039); margin-top: 150px;"></div>
+						<div class="photo-clip-area" style="border: 2px dashed rgb(221, 221, 221); position: absolute; left: 50%; top: 50%; width: 300px; height: 300px; transform: translate(-50%, -50%);"></div>
+						</div>
+					</div>
+				<div class="loading displaynone">正在载入图片...</div>
+				<div class="footer_cj">
+				<dl>
+					<dd style="background: #fe1041; color: #ffffff;border: none;">打开相册<input type="file" id="file" name="file" accept="image/jpeg, image/x-png, image/gif"></dd>
+	      			<dd id="clipBtn">完成裁剪</dd>
+				</dl>
+				<div class="back">取消</div>
+				</div>
+			</div>
+		</div>
+		<!-- 个人设置信息 -->
+		<div class="clearfix mySetMsg">
+			<div class="mySetMsg_top clearfix">
+				<div class="myMsgShow fl">
+					<h4>king</h4>
+					<p class="place">广州</p>
+				</div>
+				<span class="fr editMyDate">编辑个人资料</span>
+			</div>
+			<ul class="">
+				<li class="ellipsis my_introduce">简介编辑个人资料编辑个人资料编辑个人资料编辑个人资料编辑个人资料编辑个人资料编辑个人资料</li>
+			</ul>
+		</div>
+		<div class="myMsg_part clearfix">
+			<div class="fl">
+				<span class='my_follow'>0</span>
+				<p>关注</p>
+			</div>
+			<div class="fl">
+				<span class='my_follow_you'>0</span>
+				<p>被关注</p>
+			</div>
+		</div>
+
+		<div class="join_time">
+			<h4>2017</h4>
+			<h3>八月</h3>
+			<span class="join">加&nbsp;入</span>
+		</div>
+	</div>
+	<div class="viewport" id="setMsg" style="background:#f2f1ee;">
+		<div style="height:0.98rem;">&nbsp;</div>
+		<div class="header clearfix setMsg_bj">
+			<span class="setMsg_qx fl">取消</span>
+			<p class="fl">个人资料</p>
+			<span class="setMsg_bc fr">保存</span>
+		</div>
+
+		<div class="setMsg_part">
+			<span>昵称</span>
+			<input type="text" value="" id="nickname">
+		</div>
+
+		<div class="setMsg_part clearfix">
+			<span class="fl">简介</span>
+			<textarea name="introduce" id="introduce" class="fl"></textarea>
+		</div>
+
+		<div class="setMsg_part setMsg_part1 clearfix">
+			<span class="fl">性别</span>
+			<div id="setMsg_sex" class="fl" value="">&nbsp;</div>
+			<ul class="setMsg_sexChoose">
+				<li value="1">男</li>
+				<li value="2">女</li>
+				<li value="3">保密</li>
+			</ul>
+		</div>
+		
+
+		<div class="setMsg_part setMsg_part1 clearfix">
+			<span class="fl">城市</span>
+			<div id="setMsg_city" class="fl" value="">&nbsp;</div>
+		</div>
+
+		<div class="setMsg_part setMsg_part1 setMsg_part2 clearfix">
+			<span class="fl">生日</span>
+			<!-- <div id="setMsg_birthday" class="fl" value="">&nbsp;</div> -->
+			<input type="date" id="setMsg_birthday">
+		</div>
+		
+		<p style="padding-left:0.4rem;line-height:0.48rem;">生日将不在个人首页显示</p>
+	</div>
+
+	<script type="text/javascript" src="../static/js/pic/hammer.min.js"></script>
+	<script type="text/javascript" src="../static/js/pic/lrz.all.bundle.js"></script>
+	<script type="text/javascript" src="../static/js/pic/iscroll-zoom-min.js"></script>
+	<script type="text/javascript" src="../static/js/pic/PhotoClip.js"></script>
+	<script>
+			// 1.跳转页面已经做了登录判断 。只有登录了才能看到这个页面			
+			// 2.用户通过其他渠道进入此页面 则多做一个判断
+			if(!hadLogin()){
+				window.location.href="/wap/login.html";
+			}
+
+			// 本地localStorage 判断是否有登录。
+			function jumpTo(p, url) { 
+			   var hadUser=window.localStorage.getItem('user'); 
+			   console.log(hadUser);
+			   if (hadUser == undefined || hadUser == "") { 
+			     p.attr("href", "/wap/login.html"); 
+				} else { 
+			      p.attr("href", url); 
+			    } 
+			} 
+			 function isLogin(getUrl) { 
+			   var isLogin = $("#isLogin"); 
+			   jumpTo(isLogin, getUrl); 
+			} 
+	
+			
+			$(".btn").click(function(){
+				$(this).attr('where',1);
+				$(".clipbg").fadeIn()
+			})
+			var clipArea = new  PhotoClip("#clipArea", {
+					size: [300, 300],//裁剪框大小
+					outputSize:[0,0],//打开图片大小，[0,0]表示原图大小
+					file: "#file",
+					ok: "#clipBtn",
+					loadStart: function() { //图片开始加载的回调函数（如果是使用非 file 的方式加载图片，则该参数为图片的 url）
+						$(".loading").removeClass("displaynone");
+					},
+					loadComplete: function() {//图片加载完成的回调函数。
+						$(".loading").addClass("displaynone");
+					},
+					done: function(dataURL) { //裁剪完成的回调函数。this 指向当前 PhotoClip 的实例对象，会将裁剪出的图像数据DataURL作为参数传入。			
+						//console.log(dataURL);//dataURL裁剪后图片地址base64格式提交给后台处理
+						// $('.btn').each(function(){ //判断上传的图片 是背景 rel=bg，还是头像 rel = head;
+						// 		if($(this).attr('rel') == 'head' && $(this).attr('where') == 1){ //上传头像
+						// 			var upStyle = $(this).attr('rel'); 
+						// 			$(this).children('img').attr('src',dataURL); //直接更改图片。异步上传图片
+						// 			formData.append("name","用户头像");
+						// 		}else  if($(this).attr('rel') == 'bg' && $(this).attr('where') == 1){ //上传背景
+						// 			var upStyle = $(this).attr('rel'); 
+						// 			$('.my_bg').css({"background-image":'url('+dataURL+')'});
+						// 			formData.append("name","用户背景");
+						// 		}
+						// })
+						//$('.btn').attr('where',0); //去除标记
+						$(".clipbg").fadeOut();
+						$('.btn').children('img').attr('src',dataURL); //直接更改图片。异步上传图片
+						var formData = new FormData();
+						var storage=window.localStorage;
+						var user = JSON.parse(storage.user);//localStorage 字符串 转化为 对象
+						var blobData = convertImgDataToBlob(dataURL); //convertImgDataToBlob base64 转化为 blob 数据
+						var file = $("#file").get(0).files[0];
+						
+						formData.append("userId",user.id);
+						formData.append("name","用户头像");
+						formData.append("type",1);											
+						formData.append("module","user");						
+						formData.append("file",blobData,file.name);
+						$.ajax({
+							type:"post",
+							url:"/upload/file/upload",
+							data:formData,
+							processData: false,
+							contentType: false,
+							success:function(data){
+								if(data.success){	
+									$.ajax({
+										type:'post',
+										url:"/wap/user/change-head-url",
+										data:{
+											userId:user.id,
+											url:data.collection[0]
+										},
+										async:false,
+										success:function(msg){
+											if(msg.success){
+												showBackMsg2("上传成功");
+												user.headUrl=data.collection[0];
+												//对象 转化为字符串.
+												storage.setItem('user',JSON.stringify(user)); //json 字符串。localstorage只能存字符串。
+											}else{
+												showBackMsg(msg.message);
+											}
+											
+										},
+										error:function(){
+											showBackMsg2("内部出处");
+										}
+
+									})					
+								}
+								else{									
+									showBackMsg2(data.message);
+								}
+							},
+							error:function(){
+								showBackMsg2('保存错误，请坚持网络是否通顺');
+							}
+						})
+						
+					}
+				});
+				$(".back").click(function(){
+					// $('.btn').attr('where',0); //去除标记
+					$(".clipbg").fadeOut();
+				})		
+		</script>
+
+	<script>
+		var storage = window.localStorage;
+		//加载个人数据 ：同步， localStorage 字符串，转化为对象用JSON.parse();
+		//myMessage 和 user  一样
+		var myMessage = JSON.parse(storage.getItem('user'));
+		var user = JSON.parse(storage.user);
+		console.log(myMessage);
+
+		var getDate=new Object();
+		getDate.joinTime = 1502078400000; //2017-8-7-12:0:0
+
+		$(function(){
+			putMsg();
+			setMyMsg(); //初始及修改后个人设置。
+			//
+			var firstTime = new Date(getDate.joinTime);
+			var year = firstTime.getFullYear();
+			var month = firstTime.getMonth()+1;
+			$('.join_time h4').html(year);
+			var setMonth = ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月'];
+			for(var i=0;i<=12;i++){
+				if(i== month-1){
+					$('.join_time h3').html(setMonth[i]);
+				}
+			}					
+		})
+		function putMsg(){
+			var sexs ='';
+			if(myMessage.sex==1){
+				sexs= "男";
+			}else if(myMessage.sex==2){
+				sexs = "女";
+			}else{
+				sexs= "保密";
+			}
+			$('#nickname').val(myMessage.username); // 昵称
+			$('#introduce').val(myMessage.summary); // 简介
+			$('#setMsg_sex').attr('value',myMessage.sex).html(sexs); //性别
+			$('#setMsg_city').attr('value',myMessage.city).html(myMessage.city); //城市
+			$('#setMsg_birthday').attr('value',myMessage.birthday).html(myMessage.birthday);//生日
+		}
+		function setMyMsg(){
+			var nickname = $('#nickname').val();
+			var city = $('#setMsg_city').attr('value');
+			var introduce = $('#introduce').val();
+			var sex = $('#setMsg_sex').attr('value');
+			var headUrl = myMessage.headUrl;
+
+			$('.my_bg_header img').attr('src',headUrl);
+			$('.myMsgShow h4').html(nickname);
+			$('.myMsgShow .place').html(city);
+			$('.my_introduce').html(introduce);
+
+			if( sex == "1"){
+				$('.myMsgShow h4').css({"background-image":"url(../static/images/icon/icon_man.png)"});
+			}else if( sex == "2"){
+				$('.myMsgShow h4').css({"background-image":"url(../static/images/icon/icon_woman.png)"});
+			}else{
+				$('.myMsgShow h4').css({"background-image":"none"});
+			}
+				
+		}
+		//编辑
+		$('.editMyDate').click(function(){
+			$('#myMsg').hide();
+			$("#setMsg").show();
+			putMsg(); 
+		})
+		//取消编辑
+		$('.setMsg_qx').click(function(){
+			$('#myMsg').show();
+			$("#setMsg").hide();
+		})
+		//保存编辑
+		$('.setMsg_bc').click(function(){
+			if($('#nickname').val().length<1||$('#nickname').val().length>20){
+				alert('昵称为1-20个字符。');
+			}else{
+				$('#setMsg').hide();
+				$("#myMsg").show();
+				setMyMsg();
+				var id = myMessage.id;
+
+				var nickname = $('#nickname').val();
+				var city = $('#setMsg_city').attr('value');
+				var summary = $('#introduce').val();
+				var sex = $('#setMsg_sex').attr('value');
+				var birthday = $('#setMsg_birthday').val();
+				//上传到服务器。 
+				$.ajax({
+					type:"post",
+					url:"/wap/user/update-user-info",
+					async:false, //异步
+					data:{
+						id:id,
+						nickname:nickname,
+						city:city,
+						summary:summary,
+						sex:sex,
+						birthday:birthday
+					},
+					success:function(data){
+						if(data.success){
+							//同时修改locastorage：不用再次请求数据库 .头像在插件里面改				
+							myMessage.nickname = nickname;
+							myMessage.sex = sex;
+							myMessage.city = city;
+							myMessage.summary = summary;
+							myMessage.birthday = birthday;
+							//对象 转化为字符串.
+							storage.setItem('user',JSON.stringify(myMessage)); //json 字符串。localstorage只能存字符串。
+							$('.setMsg_bc').attr('rel',0);
+							showBackMsg('上传成功');
+						}
+						else{
+							
+							showBackMsg('保存错误，请坚持网络是否通顺');
+						}
+					}
+					
+				})
+			}
+			
+		})
+		
+		
+		//textarea 高度自适应
+		$("#introduce").height($("#introduce").scrollHeight);
+		$("#introduce").on("keyup keydown", function(){
+		    $(this).height(this.scrollHeight);
+		})
+		//性别
+		$('#setMsg_sex').click(function(){
+			$('.mengceng').show();
+			$('.setMsg_sexChoose').fadeIn();
+			$('.setMsg_sexChoose li').click(function(){
+				$('#setMsg_sex').attr('value',$(this).attr('value')).html($(this).html());
+				$('.mengceng').hide();
+				$('.setMsg_sexChoose').hide();
+			})
+		})
+	</script>
+</body>
+</html>

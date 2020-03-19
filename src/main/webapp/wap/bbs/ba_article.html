@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<!--解决uc更改默认字体大小-->
+	<meta name="wap-font-scale" content="no"/>
+	<title>贴吧</title>
+	<link rel="stylesheet" type="text/css" href="../static/css/public.css"/>
+	<link rel="stylesheet" href="../static/css/index.css" />
+	<script src="../static/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="../static/js/common.js"></script>
+	<script src="../static/js/index.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<div class="viewport ba_article">
+			<div style="height: 0.84rem;">&nbsp;</div>
+			<div class="ba_article_header header clearfix">
+				<i class="icon_back"></i>
+				<h4>七龙珠吧</h4>
+				<i class="icon_setMore"></i>
+				<i class="comeba_top_search"></i>
+			</div>
+			
+			<div class="ba_top clearfix">
+				<div class="img"><img src="../static/images/ba_qlz_03.png"/></div>
+				<div class="ba_top_right">
+					<div class="ba_title clearfix">
+						<h4>七龙珠吧</h4>
+						<button>日本动漫</button>
+					</div>
+					<span>关注 <em>12346</em></span><span>帖子 <em>4546456</em></span>
+					<div class="ba_qd clearfix">
+						<div class="ba_qd_left">
+							<span class="ba_this_num">2</span><span>/</span><span class="ba_all_num">5</span>
+							<div class="ba_bg1"><p class="progress"></p></div>
+						</div>
+						<div class="ba_qd_right">
+							<p>签到</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript">		
+			$('.ba_qd_right').click(function(){
+				if($(this).attr('rel')!=1){
+					$(this).attr('rel',1).css({'background':'#f1f3f6 url(../static/images/icon/icon_yes.png) 0.6rem center no-repeat','background-size':'18%'}).children().html('已签到').css({'color':'#b2b6ba'});
+					$('.ba_this_num').html(Number($('.ba_this_num').html())+1);
+					setProgress();
+				}
+			})
+			$(function(){
+				var x=2; //初始设置为1 ，记录
+				$('.progress').width($('.ba_bg1').width()*x);
+			})
+			function setProgress(){
+//				var x=1;
+				 x = $('.ba_this_num').html()/ $('.ba_all_num').html();
+				$('.progress').width($('.ba_bg1').width()*x);
+			}
+		</script>
+	</body>
+</html>

@@ -1,2 +1,1 @@
 # anmong
-anmong sns

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<!--解决uc更改默认字体大小-->
+	<meta name="wap-font-scale" content="no"/>
+	<title>找回密码</title>
+	<link rel="stylesheet" type="text/css" href="static/css/public.css"/>
+	<link rel="stylesheet" href="static/css/index.css" />
+	<script src="static/js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="static/js/common.js"></script>
+	<script src="static/js/index.js" type="text/javascript" charset="utf-8"></script>
+	
+	</head>
+	<body style="background: #f7f7f7;">
+		<div class="viewport">
+			<div style="height: 0.9rem;">&nbsp;</div>
+			
+			<div class="login_header header clearfix">
+				<i class="icon_close"></i>
+				<p>找回密码</p>
+			</div>
+			
+			<div class="found_pwd">
+				<form action=""  onclick="return checkSubmit();">
+						<div class="login1_pwd foundPwd_name">
+							<span>手机号</span>
+							<input type="text" name="foundPwd_num" id="foundPwd_num" placeholder="请输入手机号"/>
+							<div class="login_hide"></div>
+							<div class="login_reset2"></div>
+						</div>
+						<div class="login_twm">
+							<span>图文码</span>
+							<input type="text" name="twm" id="twm" placeholder="请输入图文码"/>
+							<div class="login_hide"></div>
+							<div class="login_reset"></div>
+							<div class="changTwm csscf580ede21a446"></div>
+						</div>
+						<div class="foundPwd_next">
+							<input type="button" value="下一步" class="found_next"/>
+							<div class="next_message"></div>
+						</div>
+				</form>	
+			</div>		
+			
+			<div class="found_pwd_next" style="display: none;">
+				<p class="send_phone_num"></p>
+				
+				<form action="" class="fd_second" onclick="return checkSubmit();">
+					<div class="clearfix fd_yzm">
+						<div class="login2_name foundPwd_yzm">
+							<span>验证码</span>
+							<input type="text" name="foundPwd_yzm" id="foundPwd_yzm" placeholder="请输入验证码"/>
+							<div class="login_hide"></div>
+							<div class="login_reset"></div>
+						</div>
+						<div class="send_yzm"><p>验证码</p></div>
+					</div>
+					<div class="login1_pwd foundPwd_pwd">
+						<span>新密码</span>
+						<input type="password" name="new_pwd" id="new_pwd" placeholder="请输入6-16位字母/数字"/>
+						<div class="login_hide"></div>
+						<div class="login_reset"></div>
+						<span class="eye"></span>
+					</div>
+					<div class="login1_pwd foundPwd_repeatpwd">
+						<span>确认密码</span>
+						<input type="password" name="new_repeatpwd" id="new_repeatpwd" placeholder="请再次输入密码"/>
+						<div class="login_hide"></div>
+						<div class="login_reset"></div>
+					</div>
+					<div class="foundPwd_sure">
+						<input type="submit" value="确定" class="foundPwd_qd"/>
+					</div>
+				</form>
+			</div>
+		</div>
+	
+	<script src="static/js/foundPwd.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

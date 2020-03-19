@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<button id="auth">授权</button>
+<button id="userInfo">获取用户信息</button>
+<button id="scan">扫一扫</button>
+<button id="photo">拍照</button>
+<div id="show"></div>
+</body>
+<script type="text/javascript" src="/wap/static/js/jquery-3.2.1.min.js"></script>
+<script src="/wap/static/js/vue.min.js"></script>
+<script type="text/javascript" src="/admin/static/self/js/public.js"></script>
+<script type="text/javascript" src="/wap/static/js/jweixin-1.2.0.js"></script>
+<script>
+
+    $(document).ready(function () {
+
+        $.ajax({
+            url: "/public/get-config",
+            data: {
+                url:"http://48096274.nat123.cc/user.html?nsukey=z7oZWP7YZZN1XgxUWuh9qJThez%2FxsslQ3ytHuaSV6UdsiugV7ZBCTpThjQlPeQnzN5HTV5Gjm1S6lGQTg0zx7Kkq6rUXaoBdafwHa8j6arq4l0P19eAmBpzN2ElYR9xpdU19CxJxO4eUa8NWmjpYwCGlvsd94rKSUpgSQ1iyB%2FUiNVVNf6uMS1L3iSSZDka62YkelxO2lZusA%2BHpxzcmYA%3D%3D"
+            },
+            type: "GET",
+            async:false,
+            success: function(re) {
+                //初始化
+                wx.config({
+                    debug : true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
+                    appId : re.appId, // 必填，公众号的唯一标识
+                    timestamp : re.timestamp, // 必填，生成签名的时间戳
+                    nonceStr : re.nonceStr, // 必填，生成签名的随机串
+                    signature : re.signature,// 必填，签名，见附录1
+                    jsApiList : [ 'scanQRCode','chooseImage' ]
+                    // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+                });
+
+
+            },
+            error:function(){
+                showMsg('出错了，请稍后再试！');
+            }
+        });
+
+    })
+    $("#auth").click(function () {
+        $.ajax({
+            url: "/public/get-auth-url",
+            data: {
+                url:"http://48096274.nat123.cc/user.html"
+            },
+            type: "GET",
+            success: function(re) {
+                window.location.href=re;
+              /*  if(re.success) {
+                    alert()
+                }
+                else{
+                    showMsg(re.message);
+                }*/
+            },
+            error:function(){
+                showMsg('出错了，请稍后再试！');
+            }
+        });
+    });
+
+    $("#userInfo").click(function () {
+        $.ajax({
+            url: "/public/get-user-info",
+            data: {
+                code:getUrlParameter("code")
+            },
+            type: "GET",
+            success: function(re) {
+              var template = '<table width="100%"  cellpadding="0" cellspacing="0" border="1" align="center" >\n' +
+                  '    <tr>\n' +
+                  '        <th>昵称</th>\n' +
+                  '        <th>头像</th>\n' +
+                  '        <th>国家</th>\n' +
+                  '        <th>城市</th>\n' +
+                  '        <th>性别</th>\n' +
+                  '        <th>openId</th>\n' +
+                  '    </tr>\n' +
+                  '    <tr>\n' +
+                  '        <td>'+re.nickname+'</td>\n' +
+                  '        <td><img src="'+re.headimgurl+'"/></td>\n' +
+                  '        <td>'+re.country+'</td>\n' +
+                  '        <td>'+re.city+'</td>\n' +
+                  '        <td>'+re.sex+'</td>\n' +
+                  '        <td>'+re.openid+'</td>\n' +
+                  '    </tr>\n' +
+                  '    \n' +
+                  '</table>';
+              $("#show").append(template);
+            },
+            error:function(){
+                showMsg('出错了，请稍后再试！');
+            }
+        });
+    });
+
+    $("#scan").click(function () {
+
+        //调用扫一扫
+        wx.ready(function () {
+            wx.checkJsApi({
+                jsApiList : ['scanQRCode'],
+                success : function(res) {
+                    wx.scanQRCode({
+                        // 默认为0，扫描结果由微信处理，1则直接返回扫描结果
+                        needResult: 1,
+                        desc: 'scanQRCode desc',
+                        success: function (res) {
+                            //扫码后获取结果参数赋值给Input
+                            var url = res.resultStr;
+                            //商品条形码，取","后面的
+                            alert(url);
+                        }
+                    });
+                }
+            });
+
+
+        })
+
+    });
+
+    $("#photo").click(function () {
+
+        //调用拍照
+        wx.ready(function() {
+            wx.chooseImage({
+                sizeType: ['original', 'compressed'],   // 可以指定是原图还是压缩图，默认二者都有
+                sourceType: ['album', 'camera'],        // 可以指定来源是相册还是相机，默认二者都有
+                success: function (res) {
+                }
+            })
+        })
+
+    });
+
+
+
+    function getUrlParameter(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return decodeURI(r[2]); return null;
+    }
+</script>
+</html>
