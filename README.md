@@ -1,1 +1,2 @@
 # anmong
+Based on the real-time information sharing, dissemination and acquisition of user relationship, a broadcast type social media and network platform for sharing short real-time information through the focus mechanism. Users can access through a variety of mobile terminals such as PC and mobile phone, and realize the real-time information sharing, dissemination and interaction in the form of text, picture, video and other multimedia.
